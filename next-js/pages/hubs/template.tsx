@@ -85,28 +85,32 @@ const BlogTags: React.FC<IBlogTags> = (props) => {
 
 export default function Home() {
   const { onClose } = useDisclosure();
+  const wid: string = `calc(100vw - ${sideBarWidth})`;
   return (
     <>
       <Head>
         <title>トップ - ふろんとらいん</title>
       </Head>
 
-      
+      <Flex>
+        <TopBuffer />
         <TopBar />
-          <Flex paddingTop="calc(33px + 1rem)" w="100vw">
+        <Flex>
+          <SideBuffer />
+          <SidebarContent paddingTop="calc(33px + 1rem)" />
+          <Flex paddingTop="calc(33px + 1rem)" w={wid}>
             <Container maxW="container.sm">
               <Text
                 fontSize={"14pt"}
-                
-                fontFamily={["ヒラギノ角ゴ ProN W3", "游ゴシック", "Yu Gothic", "メイリオ", "Meiryo", "Verdana", "Helvetica", "Arial", "sans-serif"]}
+                fontWeight={600}
                 color={useColorModeValue("gray.600", "gray.200")}
-                mt="10px"
               >
                 ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ
               </Text>
             </Container>
           </Flex>
-        
+        </Flex>
+      </Flex>
 
       {/* <SidebarContent
         onClose={() => onClose}
@@ -162,7 +166,7 @@ const TopBar = (): JSX.Element => {
     <>
       {/* このFlexでメニューバーの設定*/}
       <Flex
-        bg={useColorModeValue("white", "gray.900")}
+        bg={useColorModeValue("green.100", "gray.900")}
         color={useColorModeValue("gray.600", "white")}
         py={{ base: 2 }}
         px={{ base: 4 }}
