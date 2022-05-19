@@ -37,6 +37,7 @@ import {
   FlexProps,
   HStack,
   VStack,
+  NumberInputProps,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -57,6 +58,7 @@ import { AiOutlineTag } from "react-icons/ai";
 import NextLink from "next/link";
 import Head from "next/head";
 import { IconType } from "react-icons";
+import { getSortedPostsData } from "../lib/posts";
 
 const logoRatio: number = 2.5;
 const logoWidth: number = 73.41026 * logoRatio;
@@ -83,7 +85,16 @@ const BlogTags: React.FC<IBlogTags> = (props) => {
   );
 };
 
-export default function Home() {
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
+
+export default function Home({ allPostsData }: any) {
   const { onClose } = useDisclosure();
   return (
     <>
@@ -91,31 +102,55 @@ export default function Home() {
         <title>トップ - ふろんとらいん</title>
       </Head>
 
-      
-        <TopBar />
-          <Flex paddingTop="calc(33px + 1rem)" w="100vw">
-            <Container maxW="container.sm">
-              <Text
-                fontSize={"14pt"}
-                
-                fontFamily={["ヒラギノ角ゴ ProN W3", "游ゴシック", "Yu Gothic", "メイリオ", "Meiryo", "Verdana", "Helvetica", "Arial", "sans-serif"]}
-                color={useColorModeValue("gray.600", "gray.200")}
-                mt="10px"
-              >
-                ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ
-              </Text>
-            </Container>
-          </Flex>
-        
-
-      {/* <SidebarContent
-        onClose={() => onClose}
-        display={{ base: "none", md: "inline" }}
-      /> */}
-      {/* <Main /> */}
+      <TopBar />
+      <Flex paddingTop="calc(33px + 1rem)" w="100vw">
+        <Container maxW="container.sm">
+          <Main allPostsData={allPostsData} />
+        </Container>
+      </Flex>
     </>
   );
 }
+
+type PostData = {
+  id: string;
+  date: string;
+  title: string;
+};
+
+type MultiplePostsData = {
+  a: PostData[];
+};
+
+const Main = ({
+  allPostsData,
+}: {
+  allPostsData: { id: string; date: string; title: string }[];
+}) => {
+  console.log(allPostsData);
+  return (
+    <Flex mt="1em" align="left" display={"block"}>
+      <Heading as="h2">Contents</Heading>
+      <Box borderWidth={"3px"} bg={"gray.100"}>
+        <Link fontSize={"3xl"} color="#0066c0">
+          Sample Link
+        </Link>
+      </Box>
+      <Heading as="h2">New Posts</Heading>
+      <Box border={"3px"} bg={"gray.100"}>
+        <Link fontSize={"3xl"} color="#0066c0">
+          Sample Link
+        </Link>
+      </Box>
+
+      <Text>
+        {/* {allPostsData.map(({ id, date, title }) => `ファイル名：${id} 日付：${date} タイトル：${title}`)} */}
+
+        <Heading>Chakra UI Heading</Heading>
+      </Text>
+    </Flex>
+  );
+};
 
 const TopLink = (): JSX.Element => {
   return (
@@ -237,80 +272,6 @@ const TopBar = (): JSX.Element => {
   );
 };
 
-const Main = (): JSX.Element => {
-  return (
-    <Container maxW={"7xl"} p="12">
-      <Heading as="h1">トップページ</Heading>
-      <Box
-        marginTop={{ base: "1", sm: "5" }}
-        display="flex"
-        flexDirection={{ base: "column", sm: "row" }}
-        justifyContent="space-between"
-      >
-        <Box
-          display="flex"
-          flex="1"
-          marginRight="3"
-          position="relative"
-          alignItems="center"
-        >
-          <Box
-            width={{ base: "100%", sm: "85%" }}
-            zIndex="2"
-            marginLeft={{ base: "0", sm: "5%" }}
-            marginTop="5%"
-          >
-            <Link textDecoration="none" _hover={{ textDecoration: "none" }}>
-              <Image
-                borderRadius="lg"
-                src={
-                  "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80"
-                }
-                alt="some good alt text"
-                objectFit="contain"
-              />
-            </Link>
-          </Box>
-        </Box>
-        <Box
-          display="flex"
-          flex="1"
-          flexDirection="column"
-          justifyContent="center"
-          marginTop={{ base: "3", sm: "0" }}
-        >
-          {/* <BlogTags tags={["Engineering", "Product"]} /> */}
-          <Heading marginTop="1">
-            <Link textDecoration="none" _hover={{ textDecoration: "none" }}>
-              サンプル記事
-            </Link>
-          </Heading>
-          <Text
-            as="p"
-            marginTop="2"
-            color={useColorModeValue("gray.700", "gray.200")}
-            fontSize="lg"
-          >
-            現在存在する唯一の記事です。このブログについて書いてあります。
-          </Text>
-        </Box>
-      </Box>
-      <VStack paddingTop="40px" spacing="3" alignItems="flex-start">
-        <Heading as="h2" size="xl" mb="6px">
-          このブログについて
-        </Heading>
-        <Text as="p" fontSize="lg">
-          ふろん (@Focus-Sash)
-          の個人ブログです。まだなにも実装してません。いろいろなことについて書く予定です。
-        </Text>
-        <Heading as="h3" size="md" mt="6px">
-          実装予定の機能
-        </Heading>
-      </VStack>
-    </Container>
-  );
-};
-
 interface LinkItemProps {
   name: string;
   icon: IconType;
@@ -395,16 +356,16 @@ const TopBuffer = () => {
   return (
     <Box
       bg={useColorModeValue("red.100", "gray.900")}
-      borderBttom="1px"
+      borderBottom="1px"
       borderBottomColor={useColorModeValue("gray.200", "gray.700")}
       w={{ base: "full", md: sideBarWidth }}
       h="100vh"
       pos="relative"
       opacity={0.33}
-      margin={"0"}>
-    </Box>
+      margin={"0"}
+    ></Box>
   );
-}
+};
 
 const SideBuffer = () => {
   return (

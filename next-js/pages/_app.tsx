@@ -1,14 +1,12 @@
 import '../styles/globals.css';
-import type { AppProps } from 'next/app';
+import "highlight.js/styles/base16/equilibrium-light.css"
 import { ChakraProvider } from '@chakra-ui/react';
-import { theme } from "./theme";
 
-function MyApp({ Component, pageProps }: AppProps) {
+
+export default function ChakraApp({ Component, pageProps }: any) {
   return (
-      <ChakraProvider theme={theme}>
+      <ChakraProvider resetCSS={false}>
         <Component {...pageProps} />
       </ChakraProvider>
   );
 }
-
-export default MyApp
