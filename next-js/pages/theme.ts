@@ -27,7 +27,7 @@ const variantFlushed = () => ({
   }
 });
 
-export const theme = extendTheme({
+const theme = extendTheme({
   config: {
     initialColorMode: "light",
     useSystemColorMode: false
@@ -75,3 +75,5 @@ export const theme = extendTheme({
     }
   }
 });
+
+export default theme;
