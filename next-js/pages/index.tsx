@@ -59,6 +59,7 @@ import NextLink from "next/link";
 import Head from "next/head";
 import { IconType } from "react-icons";
 import { getSortedPostsData } from "../lib/posts";
+import TopBar from "./topbar";
 
 const logoRatio: number = 2.5;
 const logoWidth: number = 73.41026 * logoRatio;
@@ -102,7 +103,7 @@ export default function Home({ allPostsData }: any) {
         <title>トップ - ふろんとらいん</title>
       </Head>
 
-      <TopBar />
+      {/* <TopBar /> */}
       <Flex paddingTop="calc(33px + 1rem)" w="100vw">
         <Container maxW="container.sm">
           <Main allPostsData={allPostsData} />
@@ -127,150 +128,27 @@ const Main = ({
 }: {
   allPostsData: { id: string; date: string; title: string }[];
 }) => {
-  console.log(allPostsData);
   return (
     <Flex mt="1em" align="left" display={"block"}>
-      <Heading as="h2">Contents</Heading>
-      <Box borderWidth={"3px"} bg={"gray.100"}>
-        <Link fontSize={"3xl"} color="#0066c0">
-          Sample Link
-        </Link>
-      </Box>
-      <Heading as="h2">New Posts</Heading>
+      <Heading as="h2">About this Blog</Heading>
+      <Text>ふろん (@Focus_Sash) の個人ブログ（制作中）です。</Text>
+      <Heading as="h2">Sample Posts</Heading>
       <Box border={"3px"} bg={"gray.100"}>
         <Link fontSize={"3xl"} color="#0066c0">
-          Sample Link
+          Sample Links
         </Link>
       </Box>
 
       <Text>
         {/* {allPostsData.map(({ id, date, title }) => `ファイル名：${id} 日付：${date} タイトル：${title}`)} */}
-
-        <Heading>Chakra UI Heading</Heading>
       </Text>
     </Flex>
   );
 };
 
-const TopLink = (): JSX.Element => {
-  return (
-    <Flex height="32px">
-      <Center height="32px">
-        <NextLink href="/">
-          <a id="top-link">
-            <Image
-              src="/images/furon-test.svg"
-              alt="ふろんとらいん"
-              objectFit="contain"
-              maxH="32px"
-            ></Image>
-          </a>
-        </NextLink>
-      </Center>
-    </Flex>
-  );
-};
 
-const DeskTopSearchField = (): JSX.Element => {
-  return (
-    <InputGroup size="sm" height={"60%"} width="auto">
-      <Input placeholder="サイト内検索（未実装）" width={"200px"} />
-      <InputRightAddon>
-        <SearchIcon w={3} h={3} />
-      </InputRightAddon>
-    </InputGroup>
-  );
-};
 
-const DeskTopTopBar = (): JSX.Element => {
-  return (
-    <Flex display={{ base: "none", md: "flex" }} justifyContent="space-between">
-      <TopLink />
-      <DeskTopSearchField />
-    </Flex>
-  );
-};
 
-const TopBar = (): JSX.Element => {
-  const { isOpen, onToggle } = useDisclosure();
-  return (
-    <>
-      {/* このFlexでメニューバーの設定*/}
-      <Flex
-        bg={useColorModeValue("white", "gray.900")}
-        color={useColorModeValue("gray.600", "white")}
-        py={{ base: 2 }}
-        px={{ base: 4 }}
-        borderBottomWidth={"1px"}
-        borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
-        // メニューバー全体の設定なので、alignを変えても配置は変わらない
-        align="center"
-        position="fixed"
-        margin={"0"}
-        width={"100%"}
-        height="auto"
-        display="block"
-        zIndex={200}
-      >
-        {/* スマホ用 */}
-
-        <Flex
-          display={{ base: "flex", md: "none" }}
-          justifyContent="space-between"
-          //左中右に寄せる
-        >
-          <NextLink href="/">
-            <Flex>
-              <a>
-                <Image
-                  src="/images/furon-test.svg"
-                  alt="ふろんとらいん"
-                  width={logoWidth}
-                  height={logoHeight}
-                  mt="7px"
-                ></Image>
-              </a>
-            </Flex>
-          </NextLink>
-
-          <Flex>
-            <IconButton
-              onClick={onToggle}
-              icon={
-                isOpen ? <CloseIcon w={3} h={3} /> : <SearchIcon w={5} h={5} />
-              }
-              variant={"ghost"}
-              aria-label={"Toggle Navigation"}
-            />
-
-            <IconButton
-              onClick={onToggle}
-              icon={
-                isOpen ? (
-                  <CloseIcon w={3} h={3} />
-                ) : (
-                  <HamburgerIcon w={5} h={5} />
-                )
-              }
-              variant={"ghost"}
-              aria-label={"Toggle Navigation"}
-              colorScheme="white"
-            />
-          </Flex>
-        </Flex>
-
-        {/* タブレット・PC用 */}
-
-        <DeskTopTopBar />
-      </Flex>
-
-      {/* <Collapse in={isOpen} animateOpacity>
-    <MobileNav />
-  </Collapse> */}
-    </>
-  );
-};
 
 interface LinkItemProps {
   name: string;
