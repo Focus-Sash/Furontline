@@ -59,7 +59,7 @@ import NextLink from "next/link";
 import Head from "next/head";
 import { IconType } from "react-icons";
 import { getSortedPostsData } from "../lib/posts";
-import TopBar from "./topbar";
+import TopBar from "../components/topbar";
 
 const logoRatio: number = 2.5;
 const logoWidth: number = 73.41026 * logoRatio;
