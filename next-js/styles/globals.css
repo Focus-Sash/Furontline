@@ -14,8 +14,17 @@ h1 {
 }
 
 h2 {
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #ccc;
+  position: relative;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  border-bottom: 2px solid #0990D0;
+  width: 10%;
+  position: absolute;
 }
 
 h3 {
@@ -24,7 +33,7 @@ h3 {
 }
 
 a {
-  color: #0070f3;
+  color: #0092CC;
   text-decoration: none;
 }
 
@@ -39,7 +48,8 @@ img {
 
 code {
   font-family: "Consolas", "Sans Mono", "Courier", monospace;
-  background-color: #F5F0E7;
+  font-size: .9em;
+  background-color: #F5F5F5;
   padding-left: 3px;
   padding-right: 3px;
   padding-top: 1px;

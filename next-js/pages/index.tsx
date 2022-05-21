@@ -2,64 +2,34 @@ import {
   Box,
   Flex,
   Text,
-  IconButton,
   Link,
-  Image,
-  Button,
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  InputRightAddon,
   Stack,
   Collapse,
   Icon,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
   useColorModeValue,
-  useBreakpointValue,
   useDisclosure,
   Heading,
-  extendTheme,
-  CloseButton,
-  Center,
-  styled,
-  Spacer,
-  Divider,
   SpaceProps,
-  WrapItem,
-  Wrap,
-  UnorderedList,
   BoxProps,
-  ListItem,
   Container,
   Tag,
   FlexProps,
   HStack,
-  VStack,
-  NumberInputProps,
 } from "@chakra-ui/react";
 import {
-  HamburgerIcon,
-  CloseIcon,
   ChevronDownIcon,
-  ChevronRightIcon,
-  SearchIcon,
 } from "@chakra-ui/icons";
 import {
   FiHome,
   FiTrendingUp,
   FiCompass,
-  FiStar,
   FiSettings,
-  FiMenu,
 } from "react-icons/fi";
 import { AiOutlineTag } from "react-icons/ai";
-import NextLink from "next/link";
 import Head from "next/head";
+import NextLink from "next/link";
 import { IconType } from "react-icons";
 import { getSortedPostsData } from "../lib/posts";
-import TopBar from "../components/topbar";
 
 const logoRatio: number = 2.5;
 const logoWidth: number = 73.41026 * logoRatio;
@@ -95,6 +65,8 @@ export async function getStaticProps() {
   };
 }
 
+
+
 export default function Home({ allPostsData }: any) {
   const { onClose } = useDisclosure();
   return (
@@ -128,6 +100,7 @@ const Main = ({
 }: {
   allPostsData: { id: string; date: string; title: string }[];
 }) => {
+  
   return (
     <Flex mt="1em" align="left" display={"block"}>
       <Heading as="h2">About this Blog</Heading>
@@ -138,14 +111,14 @@ const Main = ({
           Sample Links
         </Link>
       </Box>
-
-      <Text>
-        {/* {allPostsData.map(({ id, date, title }) => `ファイル名：${id} 日付：${date} タイトル：${title}`)} */}
-      </Text>
+      {allPostsData.map((postData, index, array) => {
+        return (
+          <NextLink href={`posts/${postData.id}`} passHref key={postData.id}><Link display="block">{postData.title}</Link></NextLink>
+        );
+      })}
     </Flex>
   );
 };
-
 
 
 

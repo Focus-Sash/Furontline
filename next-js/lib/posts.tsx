@@ -1,17 +1,14 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import {unified} from "unified";
-import gfm from "remark-gfm";
-import html from 'remark-html';
-import remarkParse from 'remark-parse';
-import slug from "remark-slug";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import rehypeSlug from "rehype-slug";
 import remarkRehype from "remark-rehype";
 import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify/lib";
-
-
-
+import extractToc from "./get-toc";
+import visit from "unist-util-visit";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
@@ -46,7 +43,7 @@ export function getSortedPostsData() {
   });
 }
 
-export function getAllPostsIds () {
+export function getAllPostsIds() {
   const tmpFileNames = fs.readdirSync(postsDirectory);
   const fileNames: string[] = [];
   for (let i = 0; i < tmpFileNames.length; i++) {
@@ -57,10 +54,10 @@ export function getAllPostsIds () {
   return fileNames.map((fileName) => {
     return {
       params: {
-        id: fileName.replace(/\.md$/, ''),
-      }
-    }
-  })
+        id: fileName.replace(/\.md$/, ""),
+      },
+    };
+  });
 }
 
 export async function getPostData(id: string) {
@@ -70,16 +67,28 @@ export async function getPostData(id: string) {
   const matterResult = matter(fileContents);
   const processedContent = await unified()
     .use(remarkParse)
-    .use(slug)
     .use(remarkRehype)
+    .use(rehypeSlug)
     .use(rehypeHighlight)
     .use(rehypeStringify)
     .process(matterResult.content);
 
   const contentHtml = processedContent.toString();
   return {
-    id, 
+    id,
     contentHtml,
-    ...matterResult.data
+    ...matterResult.data,
   };
 }
+
+// export async function getPostToc(id: string) {
+//   const fullPath = path.join(postsDirectory, `${id}.md`);
+//   const fileContents = fs.readFileSync(fullPath, "utf8");
+
+//   const ast = unified().parse(fileContents);
+//   visit(ast, "heading", child => {
+
+//   })
+
+// }
+
