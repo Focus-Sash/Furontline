@@ -7,8 +7,6 @@ import rehypeSlug from "rehype-slug";
 import remarkRehype from "remark-rehype";
 import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify/lib";
-import extractToc from "./get-toc";
-import visit from "unist-util-visit";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 

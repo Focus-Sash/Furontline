@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import { CloseIcon, SearchIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { SearchIcon } from "@chakra-ui/icons";
 import {
   Flex,
   useColorModeValue,
@@ -10,11 +10,8 @@ import {
   Image,
   Link,
   Icon,
-  textDecoration,
 } from "@chakra-ui/react";
-import { IconType } from "react-icons";
 
-import { FiHome, FiTrendingUp, FiCompass, FiSettings } from "react-icons/fi";
 import { AiFillHome } from "react-icons/ai";
 
 interface NavItemProps {
