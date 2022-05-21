@@ -31,30 +31,15 @@ const ScrollToc = ({toc}: {toc:TocContentId[]}): JSX.Element => {
   }, [itemTopOffsets, len]);
 
   useEffect(() => {
-    window.addEventListener(`scroll`, throttle(handleScroll, SCROLL_INTERVAL));
+    window.addEventListener(`scroll`, handleScroll);
     return () => {
-      window.removeEventListener(`scroll`, throttle(handleScroll, SCROLL_INTERVAL));
+      window.removeEventListener(`scroll`, handleScroll);
     }
-  }, [handleScroll])
+  });
 
   if(toc.length === 0) return <></>;
   return <Toc toc={toc} activeItemId={activeItemId} />;
 };
-
-const getTopOffsetsById = (tocContents: TocContentId[]): TocContentId[] => 
-  tocContents
-    .map(({ id, content, type, offsetTop }) => {
-      const element = document.getElementById(id);
-      
-      return {
-        id,
-        content,
-        type,
-        offsetTop: element !== null ? element.offsetTop : 0,
-      };
-    })
-    .filter((item) => item.offsetTop);
-;
 
 function getTopOffsets(toc: TocContentId[]): TocContentId[] {
   return (

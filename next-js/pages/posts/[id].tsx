@@ -14,7 +14,7 @@ export default function Post({ postData }: any) {
     <>
       <Box backgroundColor={"#F5F5F5"}>
         <Head>
-          <title> {postData.title} - ふろんとらいん</title>
+          <title> {postData.title} - ふろんてぃあ。</title>
         </Head>
         <TopBar />
         <Flex direction="column">

@@ -59,8 +59,8 @@ const Toc = ({ toc, activeItemId }: TocProps): JSX.Element => {
                   width="200px"
                   
                 >
-                  <AnchorLink href={`#${id}`} offset="120" key={id} color="#333333">
-                    <Flex color={id === activeItemId || (null === activeItemId && index === 0)? "rgba(0, 0, 0, 0.87)": "rgba(0, 0, 0, 0.6)"}>
+                  <AnchorLink href={`#${id}`} offset="120" key={id} color="#333333" id="toc">
+                    <Flex color={id === activeItemId || (null === activeItemId && index === 0)? "rgba(0, 0, 0, 0.87)": "rgba(0, 0, 0, 0.6)"} >
                       {type === 1 ? "記事トップ" : content}
                     </Flex>
                   </AnchorLink>

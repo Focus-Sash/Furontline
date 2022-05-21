@@ -55,3 +55,7 @@ code {
   padding-top: 1px;
   padding-bottom: 1px;
 }
+
+#toc:hover {
+  text-decoration: none;
+}

@@ -22,7 +22,7 @@ interface NavItemProps {
 
 const navItems: NavItemProps[] = [
   { id: "Diary", link: "/" },
-  { id: "Review", link: "/" },
+  { id: "Reviews", link: "/" },
   { id: "Learning", link: "/" },
   { id: "Posts", link: "/" },
   { id: "Tags", link: "/" },
@@ -61,30 +61,29 @@ export const TopBar = (): JSX.Element => {
       justifyContent="space-between"
     >
       <Flex>
-      <NextLink href={"/"} passHref>
-        <Link w={"26px"} h={"26px"} mb={"4px"} ml={"10px"} mr={"10px"}>
-          <Icon as={AiFillHome} w={"26px"} h={"26px"} />
-        </Link>
-      </NextLink>
+        <NextLink href={"/"} passHref>
+          <Link w={"26px"} h={"26px"} ml={"10px"} mr={"10px"} pt="1px">
+            <Icon as={AiFillHome} w={"26px"} h={"26px"} />
+          </Link>
+        </NextLink>
 
-      {navItems.map((navItem) => {
-        return (
-          <NavItem id={navItem.id} link={navItem.link} key={navItem.id}>
-            {navItem.id}
-          </NavItem>
-        );
-      })}
+        {navItems.map((navItem) => {
+          return (
+            <NavItem id={navItem.id} link={navItem.link} key={navItem.id}>
+              {navItem.id}
+            </NavItem>
+          );
+        })}
       </Flex>
       <DeskTopSearchField />
     </Flex>
-    
   );
 };
 
 export const TopBuffer = (): JSX.Element => {
   return (
     <Flex
-      bg={"#80BDF2"}
+      bg={"#F5F5F5"}
       color={useColorModeValue("gray.600", "white")}
       position="relative"
       width={"100%"}
@@ -197,10 +196,14 @@ const TopLink = (): JSX.Element => {
 
 const DeskTopSearchField = (): JSX.Element => {
   return (
-    <InputGroup size="sm" width="auto" pr="20px" >
-      <Input placeholder="サイト内検索（未実装）" width={"200px"} bgColor="#FFFFFF"/>
+    <InputGroup size="sm" width="auto" pr="20px">
+      <Input
+        placeholder="サイト内検索（未実装）"
+        width={"200px"}
+        bgColor="#FFFFFF"
+      />
       <InputRightAddon>
-        <SearchIcon w={3} h={3} color="#777777"/>
+        <SearchIcon w={3} h={3} color="#777777" />
       </InputRightAddon>
     </InputGroup>
   );

@@ -15,6 +15,8 @@ import {
   Tag,
   FlexProps,
   HStack,
+  ListItem,
+  UnorderedList,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { FiHome, FiTrendingUp, FiCompass, FiSettings } from "react-icons/fi";
@@ -64,7 +66,7 @@ export default function Home({ allPostsData }: any) {
   return (
     <>
       <Head>
-        <title>トップ - ふろんとらいん</title>
+        <title>トップ - ふろんてぃあ。</title>
       </Head>
 
       <TopBar />
@@ -111,6 +113,17 @@ const Main = ({
           </NextLink>
         );
       })}
+      <Heading>
+        Todo
+      </Heading>
+      <UnorderedList>
+        <ListItem>トップページを作る</ListItem>
+        <ListItem>カテゴリーページ（上のメニューのリンク先）を作る</ListItem>
+        <ListItem>タグ機能を作る</ListItem>
+        <ListItem>記事検索機能を作る</ListItem>
+        <ListItem>記事を増やす</ListItem>
+        <ListItem>ツイートするときにサムネイルが出るようにする</ListItem>
+      </UnorderedList>
     </Flex>
   );
 };
