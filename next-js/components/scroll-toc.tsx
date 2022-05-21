@@ -3,7 +3,7 @@ import Toc, { TocContentId } from "./toc";
 import { useThrottle } from "react-use";
 import { throttle } from "lodash";
 
-const OFFSET_ACTIVE = 100;
+const OFFSET_ACTIVE = 128;
 const SCROLL_INTERVAL = 100;
 
 

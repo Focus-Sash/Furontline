@@ -5,7 +5,7 @@ import { TopBar, TopBuffer } from "../../components/topbar";
 import extractToc from "../../lib/get-toc";
 import ScrollToc from "../../components/scroll-toc";
 
-const OFFSET_BETWEEN_TOPBAR_BETWEEN_CONTENTS = 30;
+const OFFSET_BETWEEN_TOPBAR_BETWEEN_CONTENTS = 50;
 
 export default function Post({ postData }: any) {
   console.log(extractToc(postData.contentHtml));
@@ -42,11 +42,10 @@ export default function Post({ postData }: any) {
             </Container>
             <Flex 
               position="sticky"
-              top="100px"
-              mt={`${OFFSET_BETWEEN_TOPBAR_BETWEEN_CONTENTS * 2}px`}
-              pt={`${OFFSET_BETWEEN_TOPBAR_BETWEEN_CONTENTS * 1 + 12}px`}
+              top="10px"
+              pt={`${OFFSET_BETWEEN_TOPBAR_BETWEEN_CONTENTS * 1 + 2}px`}
               ml={`${OFFSET_BETWEEN_TOPBAR_BETWEEN_CONTENTS}px`}
-              maxHeight="100vh"
+              maxHeight="calc(100vh - 20px)"
             ><ScrollToc toc={toc}/></Flex>
           </Flex>
         </Flex>
