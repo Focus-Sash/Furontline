@@ -15,7 +15,7 @@ import {
 import { IconType } from "react-icons";
 
 import { FiHome, FiTrendingUp, FiCompass, FiSettings } from "react-icons/fi";
-import { AiOutlineTag } from "react-icons/ai";
+import { AiFillHome } from "react-icons/ai";
 
 interface NavItemProps {
   id: string;
@@ -24,10 +24,9 @@ interface NavItemProps {
 }
 
 const navItems: NavItemProps[] = [
-  { id: "Top", link: "/"},
   { id: "Diary", link: "/" },
   { id: "Review", link: "/" },
-  { id: "Learning", link: "/"},
+  { id: "Learning", link: "/" },
   { id: "Posts", link: "/" },
   { id: "Tags", link: "/" },
   { id: "About", link: "/" },
@@ -36,8 +35,11 @@ const navItems: NavItemProps[] = [
 const NavItem = ({ id, link }: NavItemProps): JSX.Element => {
   return (
     <NextLink href={link} passHref>
-      <Link ml="14px" mr="14px" fontSize={"20px"} 
-        _hover={{textDecorationThickness: "2px", textUnderlineOffset: "5px"}}
+      <Link
+        ml="14px"
+        mr="14px"
+        fontSize={"20px"}
+        _hover={{ textDecorationThickness: "2px", textUnderlineOffset: "5px" }}
       >
         {id}
       </Link>
@@ -45,19 +47,29 @@ const NavItem = ({ id, link }: NavItemProps): JSX.Element => {
   );
 };
 
+const TOPBAR_HEIGHT: string = "42px";
+
 export const TopBar = (): JSX.Element => {
   return (
     <Flex
       bg={"#0990D0"}
-      color={useColorModeValue("#FFFFFF", "white")}
+      color={useColorModeValue("#FFFFFF", "#FFFFFF")}
       position="fixed"
       width={"100%"}
-      height="42px"
+      height={TOPBAR_HEIGHT}
       zIndex={200}
-      pl="20px"
+      pl="10px"
       alignItems={"center"}
       fontFamily={`"Century Gothic", "Helvetica Neue","Helvetica","Arial", sans-serif`}
+      justifyContent="space-between"
     >
+      <Flex>
+      <NextLink href={"/"} passHref>
+        <Link w={"26px"} h={"26px"} mb={"4px"} ml={"10px"} mr={"10px"}>
+          <Icon as={AiFillHome} w={"26px"} h={"26px"} />
+        </Link>
+      </NextLink>
+
       {navItems.map((navItem) => {
         return (
           <NavItem id={navItem.id} link={navItem.link} key={navItem.id}>
@@ -65,7 +77,10 @@ export const TopBar = (): JSX.Element => {
           </NavItem>
         );
       })}
+      </Flex>
+      <DeskTopSearchField />
     </Flex>
+    
   );
 };
 
@@ -76,7 +91,7 @@ export const TopBuffer = (): JSX.Element => {
       color={useColorModeValue("gray.600", "white")}
       position="relative"
       width={"100%"}
-      height="40px"
+      height={TOPBAR_HEIGHT}
       display="block"
       zIndex={0}
     />
@@ -185,10 +200,10 @@ const TopLink = (): JSX.Element => {
 
 const DeskTopSearchField = (): JSX.Element => {
   return (
-    <InputGroup size="sm" height={"60%"} width="auto">
-      <Input placeholder="サイト内検索（未実装）" width={"200px"} />
+    <InputGroup size="sm" width="auto" pr="20px" >
+      <Input placeholder="サイト内検索（未実装）" width={"200px"} bgColor="#FFFFFF"/>
       <InputRightAddon>
-        <SearchIcon w={3} h={3} />
+        <SearchIcon w={3} h={3} color="#777777"/>
       </InputRightAddon>
     </InputGroup>
   );

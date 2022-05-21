@@ -16,20 +16,14 @@ import {
   FlexProps,
   HStack,
 } from "@chakra-ui/react";
-import {
-  ChevronDownIcon,
-} from "@chakra-ui/icons";
-import {
-  FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiSettings,
-} from "react-icons/fi";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { FiHome, FiTrendingUp, FiCompass, FiSettings } from "react-icons/fi";
 import { AiOutlineTag } from "react-icons/ai";
 import Head from "next/head";
 import NextLink from "next/link";
 import { IconType } from "react-icons";
 import { getSortedPostsData } from "../lib/posts";
+import { TopBar } from "../components/topbar";
 
 const logoRatio: number = 2.5;
 const logoWidth: number = 73.41026 * logoRatio;
@@ -65,8 +59,6 @@ export async function getStaticProps() {
   };
 }
 
-
-
 export default function Home({ allPostsData }: any) {
   const { onClose } = useDisclosure();
   return (
@@ -75,7 +67,7 @@ export default function Home({ allPostsData }: any) {
         <title>トップ - ふろんとらいん</title>
       </Head>
 
-      {/* <TopBar /> */}
+      <TopBar />
       <Flex paddingTop="calc(33px + 1rem)" w="100vw">
         <Container maxW="container.sm">
           <Main allPostsData={allPostsData} />
@@ -100,28 +92,28 @@ const Main = ({
 }: {
   allPostsData: { id: string; date: string; title: string }[];
 }) => {
-  
   return (
     <Flex mt="1em" align="left" display={"block"}>
       <Heading as="h2">About this Blog</Heading>
-      <Text>ふろん (@Focus_Sash) の個人ブログ（制作中）です。</Text>
+      <Text
+        lineHeight={1.9}
+        fontFamily={`Meiryo","Yu Gothic"," "Hiragino Sans",  "sans-serif"`}
+        fontSize="16px"
+      >
+        ふろん (@Focus_Sash)
+        の個人ブログ（制作中）です。下の「ブログ作ってみた」の記事以外なにも実装してないです。
+      </Text>
       <Heading as="h2">Sample Posts</Heading>
-      <Box border={"3px"} bg={"gray.100"}>
-        <Link fontSize={"3xl"} color="#0066c0">
-          Sample Links
-        </Link>
-      </Box>
       {allPostsData.map((postData, index, array) => {
         return (
-          <NextLink href={`posts/${postData.id}`} passHref key={postData.id}><Link display="block">{postData.title}</Link></NextLink>
+          <NextLink href={`posts/${postData.id}`} passHref key={postData.id}>
+            <Link display="block" fontSize={"20px"}>{postData.title}</Link>
+          </NextLink>
         );
       })}
     </Flex>
   );
 };
-
-
-
 
 interface LinkItemProps {
   name: string;

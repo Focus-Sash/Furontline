@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import "highlight.js/styles/base16/equilibrium-light.css"
+import "highlight.js/styles/base16/classic-light.css"
 import { ChakraProvider } from '@chakra-ui/react';
 
 

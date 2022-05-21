@@ -19,8 +19,7 @@ export default function Post({ postData }: any) {
         <TopBar />
         <Flex direction="column">
           <TopBuffer />
-          <Flex flexDirection={"row"} justifyContent="center" >
-            
+          <Flex flexDirection={"row"} justifyContent="center">
             <Container
               color={"#333333"}
               maxW="750px" // container.sm + 20px * 2
@@ -38,15 +37,16 @@ export default function Post({ postData }: any) {
               // 内部的には<p>になってるはずで、そのマージンがcontainerを経由して溢れる
             >
               <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-              
             </Container>
-            <Flex 
+            <Flex
               position="sticky"
               top="10px"
               pt={`${OFFSET_BETWEEN_TOPBAR_BETWEEN_CONTENTS * 1 + 2}px`}
               ml={`${OFFSET_BETWEEN_TOPBAR_BETWEEN_CONTENTS}px`}
               maxHeight="calc(100vh - 20px)"
-            ><ScrollToc toc={toc}/></Flex>
+            >
+              <ScrollToc toc={toc} />
+            </Flex>
           </Flex>
         </Flex>
       </Box>
