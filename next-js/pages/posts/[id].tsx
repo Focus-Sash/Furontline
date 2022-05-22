@@ -8,7 +8,6 @@ import ScrollToc from "../../components/scroll-toc";
 const OFFSET_BETWEEN_TOPBAR_BETWEEN_CONTENTS = 50;
 
 export default function Post({ postData }: any) {
-  console.log(extractToc(postData.contentHtml));
   const toc = extractToc(postData.contentHtml);
   return (
     <>

@@ -78,15 +78,3 @@ export async function getPostData(id: string) {
     ...matterResult.data,
   };
 }
-
-// export async function getPostToc(id: string) {
-//   const fullPath = path.join(postsDirectory, `${id}.md`);
-//   const fileContents = fs.readFileSync(fullPath, "utf8");
-
-//   const ast = unified().parse(fileContents);
-//   visit(ast, "heading", child => {
-
-//   })
-
-// }
-
