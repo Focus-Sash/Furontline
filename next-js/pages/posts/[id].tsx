@@ -5,7 +5,7 @@ import { TopBar, TopBuffer } from "../../components/topbar";
 import extractToc from "../../lib/get-toc";
 import ScrollToc from "../../components/scroll-toc";
 
-const OFFSET_BETWEEN_TOPBAR_BETWEEN_CONTENTS = 50;
+const TOPBAR_CONTENTS_OFFSET = 50;
 
 export default function Post({ postData }: any) {
   const toc = extractToc(postData.contentHtml);
@@ -28,7 +28,7 @@ export default function Post({ postData }: any) {
               fontSize="16px"
               backgroundColor={"#FFFFFF"}
               // overflow={"hidden"}
-              mt={`${OFFSET_BETWEEN_TOPBAR_BETWEEN_CONTENTS}px`}
+              mt={`${TOPBAR_CONTENTS_OFFSET}px`}
               mb="20px"
               ml="0"
               mr="0"
@@ -40,8 +40,8 @@ export default function Post({ postData }: any) {
             <Flex
               position="sticky"
               top="10px"
-              pt={`${OFFSET_BETWEEN_TOPBAR_BETWEEN_CONTENTS * 1 + 2}px`}
-              ml={`${OFFSET_BETWEEN_TOPBAR_BETWEEN_CONTENTS}px`}
+              pt={`${TOPBAR_CONTENTS_OFFSET * 1 + 2}px`}
+              ml={`${TOPBAR_CONTENTS_OFFSET}px`}
               maxHeight="calc(100vh - 20px)"
             >
               <ScrollToc toc={toc} />

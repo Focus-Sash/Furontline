@@ -123,6 +123,9 @@ const Main = ({
         <ListItem>記事検索機能を作る</ListItem>
         <ListItem>記事を増やす</ListItem>
         <ListItem>ツイートするときにサムネイルが出るようにする</ListItem>
+        <ListItem>フッターを作る</ListItem>
+        <ListItem>記事のテンプレを作るシェルを書く</ListItem>
+        <ListItem>記事ページに作成日・最終更新日が記載されるようにする</ListItem>
       </UnorderedList>
     </Flex>
   );

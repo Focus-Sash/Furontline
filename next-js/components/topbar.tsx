@@ -21,10 +21,10 @@ interface NavItemProps {
 }
 
 const navItems: NavItemProps[] = [
-  { id: "Diary", link: "/" },
+  { id: "Diary", link: "/diary" },
   { id: "Reviews", link: "/" },
   { id: "Learning", link: "/" },
-  { id: "Posts", link: "/" },
+  { id: "Misc.", link: "/" },
   { id: "Tags", link: "/" },
   { id: "About", link: "/" },
 ];

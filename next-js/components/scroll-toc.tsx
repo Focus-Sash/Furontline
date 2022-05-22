@@ -9,16 +9,12 @@ const SCROLL_INTERVAL = 100;
 const ScrollToc = ({ toc }: { toc: TocContentId[] }): JSX.Element => {
   const len: number = toc.length;
   const [activeItemId, setActiveId] = useState<string | null>(null);
-  console.log("toc's value is", toc);
 
-  // console.log("itemTopOffsets is calculated as", itemTopOffsets);
   const handleScroll = useCallback(() => {
-    console.log("handleScroll called");
     const itemTopOffsets = getTopOffsets(toc);
     const scrollAmount: number = window.scrollY + OFFSET_ACTIVE;
-    console.log("itemTopOffsets is", itemTopOffsets);
-    console.log("scrolled", scrollAmount);
-    if (itemTopOffsets !== undefined && itemTopOffsets[0] !== undefined) {
+    
+    if (itemTopOffsets && itemTopOffsets[0]) {
       const item =
         itemTopOffsets[0].offsetTop > scrollAmount
           ? itemTopOffsets[0]
@@ -43,13 +39,11 @@ const ScrollToc = ({ toc }: { toc: TocContentId[] }): JSX.Element => {
       } else {
         setActiveId(item.id);
       }
-      console.log(activeItemId, "after setState");
     }
-  }, [toc, len, activeItemId]);
+  }, [toc, len]);
 
   useEffect(() => {
     window.addEventListener(`scroll`, throttle(handleScroll, SCROLL_INTERVAL));
-    console.log("Initialized");
     return () => {
       window.removeEventListener(
         `scroll`,
@@ -59,7 +53,6 @@ const ScrollToc = ({ toc }: { toc: TocContentId[] }): JSX.Element => {
   }, [handleScroll]);
 
   if (toc.length === 0) return <></>;
-  console.log(activeItemId, "just before return");
   return <Toc toc={toc} activeItemId={activeItemId} />;
 };
 
@@ -84,7 +77,6 @@ function getTopOffsets(toc: TocContentId[]): TocContentId[] {
       }
     })
     .filter((item) => item.offsetTop);
-  console.log("getTopOffsets returns", toc);
   return res;
 }
 
