@@ -66,7 +66,7 @@ export default function Home({ allPostsData }: any) {
   return (
     <>
       <Head>
-        <title>トップ - ふろんてぃあ。</title>
+        <title>トップ - ふろんてぃあ*</title>
       </Head>
 
       <TopBar />

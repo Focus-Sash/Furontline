@@ -37,6 +37,7 @@ const NavItem = ({ id, link }: NavItemProps): JSX.Element => {
         mr="14px"
         fontSize={"20px"}
         _hover={{ textDecorationThickness: "2px", textUnderlineOffset: "5px" }}
+        _focus={{ boxShadow: "none" }}
       >
         {id}
       </Link>
@@ -60,9 +61,16 @@ export const TopBar = (): JSX.Element => {
       fontFamily={`"Century Gothic", "Helvetica Neue","Helvetica","Arial", sans-serif`}
       justifyContent="space-between"
     >
-      <Flex>
+      <Flex _focus={{ boxShadow: "none" }}>
         <NextLink href={"/"} passHref>
-          <Link w={"26px"} h={"26px"} ml={"10px"} mr={"10px"} pt="1px">
+          <Link
+            w={"26px"}
+            h={"26px"}
+            ml={"10px"}
+            mr={"10px"}
+            pt="1px"
+            _focus={{ boxShadow: "none" }}
+          >
             <Icon as={AiFillHome} w={"26px"} h={"26px"} />
           </Link>
         </NextLink>
