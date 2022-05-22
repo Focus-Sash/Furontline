@@ -27,9 +27,6 @@ import { IconType } from "react-icons";
 import { getSortedPostsData } from "../lib/posts";
 import { TopBar } from "../components/topbar";
 
-const logoRatio: number = 2.5;
-const logoWidth: number = 73.41026 * logoRatio;
-const logoHeight: number = 10.93536 * logoRatio;
 
 const sideBarWidth: string = "200px";
 
@@ -118,7 +115,7 @@ const Main = ({
       </Heading>
       <UnorderedList>
         <ListItem>トップページを作る</ListItem>
-        <ListItem>カテゴリーページ（上のメニューのリンク先）を作る</ListItem>
+        <ListItem>カテゴリーページ（上のメニューのリンク先）を作る ... Done</ListItem>
         <ListItem>タグ機能を作る</ListItem>
         <ListItem>記事検索機能を作る</ListItem>
         <ListItem>記事を増やす</ListItem>

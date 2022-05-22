@@ -31,7 +31,6 @@ export function getSortedDiariesData() {
     };
   });
 
-  console.log(allPostsData);
 
   return allPostsData.sort((a: any, b: any) => {
     if (a.date < b.date) {

@@ -2,7 +2,6 @@ import {
   Flex,
   Text,
   Link,
-  useDisclosure,
   Heading,
   Container,
   ListItem,
@@ -27,7 +26,6 @@ export async function getStaticProps() {
 }
 
 export default function Diary({ allDiariesData }: any) {
-  const { onClose } = useDisclosure();
   return (
     <>
       <Head>
@@ -68,7 +66,7 @@ const Main = ({
         fontSize="16px"
       >
         ふろん (@Focus_Sash)
-        の日記一覧です。月ごとに１つのページがあります。現在2022年5月の日記だけがあります。
+        の日記一覧です。月ごとに1つのページがあります。現在2022年5月の日記だけがあります。
       </Text>
       <Heading as="h2">Diaries</Heading>
       {allDiariesData.map((postData, index, array) => {

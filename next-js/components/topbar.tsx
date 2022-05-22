@@ -22,11 +22,11 @@ interface NavItemProps {
 
 const navItems: NavItemProps[] = [
   { id: "Diary", link: "/diary" },
-  { id: "Reviews", link: "/" },
-  { id: "Learning", link: "/" },
-  { id: "Misc.", link: "/" },
-  { id: "Tags", link: "/" },
-  { id: "About", link: "/" },
+  { id: "Reviews", link: "/reviews" },
+  { id: "Learning", link: "/learning" },
+  { id: "Misc.", link: "/misc" },
+  { id: "Tags", link: "/tags" },
+  { id: "About", link: "/about" },
 ];
 
 const NavItem = ({ id, link }: NavItemProps): JSX.Element => {
