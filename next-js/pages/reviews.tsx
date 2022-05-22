@@ -2,6 +2,7 @@ import {
   Flex,
   Text,
   Link,
+  useDisclosure,
   Heading,
   Container,
   ListItem,
@@ -9,31 +10,30 @@ import {
 } from "@chakra-ui/react";
 import Head from "next/head";
 import NextLink from "next/link";
-import { getSortedDiariesData } from "../lib/diary";
+import { getSortedPostsData } from "../lib/posts";
 import { TopBar } from "../components/topbar";
 
-
-
 export async function getStaticProps() {
-  const allDiariesData = getSortedDiariesData();
+  const allPostsData = getSortedPostsData();
   return {
     props: {
-      allDiariesData: allDiariesData,
+      allPostsData,
     },
   };
 }
 
-export default function Diary({ allDiariesData }: any) {
+export default function Home({ allPostsData }: any) {
+  const { onClose } = useDisclosure();
   return (
     <>
       <Head>
-        <title>日記 - ふろんてぃあ*</title>
+        <title>感想 - ふろんてぃあ*</title>
       </Head>
 
       <TopBar />
       <Flex paddingTop="calc(33px + 1rem)" w="100vw">
         <Container maxW="container.sm">
-          <Main allDiariesData={allDiariesData} />
+          <Main allPostsData={allPostsData} />
         </Container>
       </Flex>
     </>
@@ -51,25 +51,24 @@ type MultiplePostsData = {
 };
 
 const Main = ({
-  allDiariesData,
+  allPostsData,
 }: {
-  allDiariesData: { id: string; date: string; title: string }[];
+  allPostsData: { id: string; date: string; title: string }[];
 }) => {
   return (
     <Flex mt="1em" align="left" display={"block"}>
-      <Heading as="h2">About this Page</Heading>
+      <Heading as="h2">About this Blog</Heading>
       <Text
         lineHeight={1.9}
         fontFamily={`Meiryo","Yu Gothic"," "Hiragino Sans",  "sans-serif"`}
         fontSize="16px"
       >
-        ふろん (@Focus_Sash)
-        の日記一覧です。月ごとに1つのページがあります。現在2022年5月の日記だけがあります。
+        ふろん (@Focus_Sash)が読んだ本や見た作品の感想の記事を置きます。まだなにもないです。
       </Text>
-      <Heading as="h2">Diaries</Heading>
-      {allDiariesData.map((postData, index, array) => {
+      <Heading as="h2">Sample Posts</Heading>
+      {allPostsData.map((postData, index, array) => {
         return (
-          <NextLink href={`diaries/${postData.id}`} passHref key={postData.id}>
+          <NextLink href={`posts/${postData.id}`} passHref key={postData.id}>
             <Link display="block" fontSize={"20px"} _focus={{ boxShadow: "none" }}>{postData.title}</Link>
           </NextLink>
         );
@@ -78,7 +77,7 @@ const Main = ({
         Todo
       </Heading>
       <UnorderedList>
-        <ListItem>日記記事用のカードを作る</ListItem>
+        <ListItem>記事を書く</ListItem>
         <ListItem>このページのレイアウトを整える</ListItem>
       </UnorderedList>
     </Flex>
