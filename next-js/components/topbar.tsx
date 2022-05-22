@@ -50,7 +50,7 @@ const TOPBAR_HEIGHT: string = "42px";
 export const TopBar = (): JSX.Element => {
   return (
     <Flex
-      bg={"#0990D0"}
+      bg={"#1376D1"}
       color={useColorModeValue("#FFFFFF", "#FFFFFF")}
       position="fixed"
       width={"100%"}

@@ -53,7 +53,7 @@ const Toc = ({ toc, activeItemId }: TocProps): JSX.Element => {
                   borderLeftWidth={
                     id === activeItemId || (null === activeItemId && index === 0) ? `${BORDER_WIDTH}px` : "0px"
                   }
-                  borderLeftColor={id === activeItemId || (null === activeItemId && index === 0) ? "#0990D0" : "#F5F5F5"}
+                  borderLeftColor={id === activeItemId || (null === activeItemId && index === 0) ? "#1376D1" : "#F5F5F5"}
                   mb={type === 1 ? "10px" : "0px"}
                   pr="15px"
                   width="200px"

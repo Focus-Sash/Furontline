@@ -18,7 +18,7 @@ const ScrollToc = ({ toc }: { toc: TocContentId[] }): JSX.Element => {
     const scrollAmount: number = window.scrollY + OFFSET_ACTIVE;
     console.log("itemTopOffsets is", itemTopOffsets);
     console.log("scrolled", scrollAmount);
-    if (itemTopOffsets !== undefined) {
+    if (itemTopOffsets !== undefined && itemTopOffsets[0] !== undefined) {
       const item =
         itemTopOffsets[0].offsetTop > scrollAmount
           ? itemTopOffsets[0]

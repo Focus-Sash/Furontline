@@ -109,7 +109,7 @@ const Main = ({
       {allPostsData.map((postData, index, array) => {
         return (
           <NextLink href={`posts/${postData.id}`} passHref key={postData.id}>
-            <Link display="block" fontSize={"20px"}>{postData.title}</Link>
+            <Link display="block" fontSize={"20px"} _focus={{ boxShadow: "none" }}>{postData.title}</Link>
           </NextLink>
         );
       })}
