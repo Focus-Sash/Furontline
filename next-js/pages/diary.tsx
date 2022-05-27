@@ -11,8 +11,7 @@ import Head from "next/head";
 import NextLink from "next/link";
 import { getSortedDiariesData } from "../lib/diary";
 import { TopBar } from "../components/topbar";
-
-
+import DiaryCard from "../components/diary-card";
 
 export async function getStaticProps() {
   const allDiariesData = getSortedDiariesData();
@@ -31,7 +30,7 @@ export default function Diary({ allDiariesData }: any) {
       </Head>
 
       <TopBar />
-      <Flex paddingTop="calc(33px + 1rem)" w="100vw">
+      <Flex paddingTop="calc(33px + 1rem)" w="100%">
         <Container maxW="container.sm">
           <Main allDiariesData={allDiariesData} />
         </Container>
@@ -60,23 +59,19 @@ const Main = ({
       <Heading as="h2">About this Page</Heading>
       <Text
         lineHeight={1.9}
-        fontFamily={`Meiryo","Yu Gothic"," "Hiragino Sans",  "sans-serif"`}
+        fontFamily={`"游ゴシック", "YuGothic", "Meiryo", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
         fontSize="16px"
+        fontWeight={"500"}
       >
         ふろん (@Focus_Sash)
         の日記一覧です。月ごとに1つのページがあります。現在2022年5月の日記だけがあります。
       </Text>
-      <Heading as="h2">Diaries</Heading>
-      {allDiariesData.map((postData, index, array) => {
-        return (
-          <NextLink href={`diaries/${postData.id}`} passHref key={postData.id}>
-            <Link display="block" fontSize={"20px"} _focus={{ boxShadow: "none" }}>{postData.title}</Link>
-          </NextLink>
-        );
-      })}
-      <Heading>
-        Todo
-      </Heading>
+      <Heading as="h2" borderWidth={"0px"} _after={{display:"none"}}
+      fontFamily={`"Helvetica Neue", "Helvetica", "Arial", sans-serif`}
+      fontSize={"40px"}
+      >2022</Heading>
+      <DiaryCard />
+      <Heading>Todo</Heading>
       <UnorderedList>
         <ListItem>日記記事用のカードを作る</ListItem>
         <ListItem>このページのレイアウトを整える</ListItem>

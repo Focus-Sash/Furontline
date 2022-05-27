@@ -55,7 +55,7 @@ const Main = ({
 }) => {
   return (
     <Flex mt="1em" align="left" display={"block"}>
-      <Heading as="h2">About this Blog</Heading>
+      <Heading as="h2">About this Page</Heading>
       <Text
         lineHeight={1.9}
         fontFamily={`Meiryo","Yu Gothic"," "Hiragino Sans",  "sans-serif"`}

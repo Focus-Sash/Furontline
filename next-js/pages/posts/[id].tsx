@@ -24,7 +24,8 @@ export default function Post({ postData }: any) {
               maxW="750px" // container.sm + 20px * 2
               p="30px"
               lineHeight={1.9}
-              fontFamily={`Meiryo","Yu Gothic"," "Hiragino Sans",  "sans-serif"`}
+              fontFamily={`"Yu Gothic", "YuGothic", "Meiryo", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
+              fontWeight={"500"}
               fontSize="16px"
               backgroundColor={"#FFFFFF"}
               // overflow={"hidden"}

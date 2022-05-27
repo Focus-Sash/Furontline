@@ -55,7 +55,7 @@ const Main = ({
 }) => {
   return (
     <Flex mt="1em" align="left" display={"block"}>
-      <Heading as="h2">About this Blog</Heading>
+      <Heading as="h2">About this Page</Heading>
       <Text
         lineHeight={1.9}
         fontFamily={`Meiryo","Yu Gothic"," "Hiragino Sans",  "sans-serif"`}
@@ -63,14 +63,7 @@ const Main = ({
       >
         ふろん (@Focus_Sash)が勉強したことに関する記事を置きます。まだなにもないです。
       </Text>
-      <Heading as="h2">Sample Posts</Heading>
-      {allPostsData.map((postData, index, array) => {
-        return (
-          <NextLink href={`posts/${postData.id}`} passHref key={postData.id}>
-            <Link display="block" fontSize={"20px"} _focus={{ boxShadow: "none" }}>{postData.title}</Link>
-          </NextLink>
-        );
-      })}
+      
       <Heading>
         Todo
       </Heading>

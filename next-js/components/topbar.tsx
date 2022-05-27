@@ -2,17 +2,16 @@ import NextLink from "next/link";
 import { SearchIcon } from "@chakra-ui/icons";
 import {
   Flex,
-  useColorModeValue,
   Center,
   InputGroup,
   Input,
   InputRightAddon,
   Image,
+  Text,
   Link,
-  Icon,
 } from "@chakra-ui/react";
 
-import { AiFillHome } from "react-icons/ai";
+import { POST_SIDE_COLOR, TOPBAR_HEIGHT } from "../lib/constants";
 
 interface NavItemProps {
   id: string;
@@ -21,12 +20,10 @@ interface NavItemProps {
 }
 
 const navItems: NavItemProps[] = [
-  { id: "Diary", link: "/diary" },
-  { id: "Reviews", link: "/reviews" },
-  { id: "Learning", link: "/learning" },
-  { id: "Misc.", link: "/misc" },
-  { id: "Tags", link: "/tags" },
-  { id: "About", link: "/about" },
+  { id: "トップ", link: "/" },
+  { id: "投稿", link: "/reviews" },
+  { id: "タグ一覧", link: "/tags" },
+  { id: "このブログについて", link: "/about" },
 ];
 
 const NavItem = ({ id, link }: NavItemProps): JSX.Element => {
@@ -35,53 +32,55 @@ const NavItem = ({ id, link }: NavItemProps): JSX.Element => {
       <Link
         ml="14px"
         mr="14px"
-        fontSize={"20px"}
-        _hover={{ textDecorationThickness: "2px", textUnderlineOffset: "5px" }}
+        fontSize={"14px"}
+        fontFamily={"Yu Gothic"}
+        fontWeight={"500"}
+        _hover={{ textDecorationThickness: "1px", textUnderlineOffset: "5px" }}
         _focus={{ boxShadow: "none" }}
+        mt={"8px"}
       >
-        {id}
+        <Text margin={0}>{id}</Text>
       </Link>
     </NextLink>
   );
 };
 
-const TOPBAR_HEIGHT: string = "42px";
-
 export const TopBar = (): JSX.Element => {
   return (
     <Flex
-      bg={"#1376D1"}
-      color={useColorModeValue("#FFFFFF", "#FFFFFF")}
+      bg={"white"}
+      color={"#777777"}
+      opacity={"95%"}
       position="fixed"
       width={"100%"}
       height={TOPBAR_HEIGHT}
       zIndex={200}
-      pl="10px"
       alignItems={"center"}
-      fontFamily={`"Century Gothic", "Helvetica Neue","Helvetica","Arial", sans-serif`}
+      fontFamily={`"Helvetica Neue", "Helvetica", "Arial", sans-serif`}
       justifyContent="space-between"
     >
       <Flex _focus={{ boxShadow: "none" }}>
-        <NextLink href={"/"} passHref>
-          <Link
-            w={"26px"}
-            h={"26px"}
-            ml={"10px"}
-            mr={"10px"}
-            pt="1px"
-            _focus={{ boxShadow: "none" }}
-          >
-            <Icon as={AiFillHome} w={"26px"} h={"26px"} />
-          </Link>
-        </NextLink>
-
-        {navItems.map((navItem) => {
-          return (
-            <NavItem id={navItem.id} link={navItem.link} key={navItem.id}>
-              {navItem.id}
-            </NavItem>
-          );
-        })}
+        {[<NextLink href={"/"} passHref key={"top"}>
+      <Link
+        ml={"20px"}
+        mr={"14px"}
+        fontSize={"22px"}
+        fontFamily={`"Trebuchet MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
+        fontWeight={"600"}
+        _hover={{ textDecoration: "none", textUnderlineOffset: "5px", textDecorationColor: "#777777"}}
+        _focus={{ boxShadow: "none" }}
+      >
+        <Text margin={0}>FURONtier</Text>
+      </Link>
+    </NextLink>].concat(
+          navItems.map((navItem) => {
+            return (
+              <NavItem id={navItem.id} link={navItem.link} key={navItem.id}>
+                {navItem.id}
+              </NavItem>
+            );
+          })
+        )}
       </Flex>
       <DeskTopSearchField />
     </Flex>
@@ -91,8 +90,8 @@ export const TopBar = (): JSX.Element => {
 export const TopBuffer = (): JSX.Element => {
   return (
     <Flex
-      bg={"#F5F5F5"}
-      color={useColorModeValue("gray.600", "white")}
+      bg={POST_SIDE_COLOR}
+      color={POST_SIDE_COLOR}
       position="relative"
       width={"100%"}
       height={TOPBAR_HEIGHT}

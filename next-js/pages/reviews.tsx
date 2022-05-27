@@ -2,16 +2,20 @@ import {
   Flex,
   Text,
   Link,
+  Image,
+  Box,
   useDisclosure,
   Heading,
   Container,
   ListItem,
   UnorderedList,
+  Divider,
 } from "@chakra-ui/react";
 import Head from "next/head";
 import NextLink from "next/link";
 import { getSortedPostsData } from "../lib/posts";
 import { TopBar } from "../components/topbar";
+import Post from "../components/post-card";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -29,12 +33,22 @@ export default function Home({ allPostsData }: any) {
       <Head>
         <title>感想 - ふろんてぃあ*</title>
       </Head>
-
       <TopBar />
-      <Flex paddingTop="calc(33px + 1rem)" w="100vw">
-        <Container maxW="container.sm">
+      <Flex
+        paddingTop="calc(33px + 1rem)"
+        w="100%"
+        backgroundImage={"/library-background.png"}
+        minH={"100vh"}
+        backgroundAttachment={"fixed"}
+        backgroundPosition={"bottom"}
+        backgroundSize={"cover"}
+      >
+        <Container maxW="1080px" bgColor={"white"} opacity={"95%"}>
+        <Container maxW="640px" bgColor={"white"}>
           <Main allPostsData={allPostsData} />
         </Container>
+        </Container>
+        <Box color={"white"}></Box>
       </Flex>
     </>
   );
@@ -57,29 +71,31 @@ const Main = ({
 }) => {
   return (
     <Flex mt="1em" align="left" display={"block"}>
-      <Heading as="h2">About this Blog</Heading>
+      <Heading
+        as="h1"
+        textAlign={"center"}
+        fontFamily={`"Yu Gothic", "Century Gothic", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
+        fontWeight={500}
+        mt={"30px"}
+      >
+        作品感想
+      </Heading>
       <Text
         lineHeight={1.9}
-        fontFamily={`Meiryo","Yu Gothic"," "Hiragino Sans",  "sans-serif"`}
+        fontFamily={`"Yu Gothic", "Meiryo", "Century Gothic", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
         fontSize="16px"
+        color={"#555555"}
+        textAlign={"center"}
+        mb={"40px"}
       >
-        ふろん (@Focus_Sash)が読んだ本や見た作品の感想の記事を置きます。まだなにもないです。
+        ** 読んだ本や見た作品の感想 **
       </Text>
-      <Heading as="h2">Sample Posts</Heading>
-      {allPostsData.map((postData, index, array) => {
-        return (
-          <NextLink href={`posts/${postData.id}`} passHref key={postData.id}>
-            <Link display="block" fontSize={"20px"} _focus={{ boxShadow: "none" }}>{postData.title}</Link>
-          </NextLink>
-        );
-      })}
-      <Heading>
-        Todo
-      </Heading>
-      <UnorderedList>
-        <ListItem>記事を書く</ListItem>
-        <ListItem>このページのレイアウトを整える</ListItem>
-      </UnorderedList>
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
     </Flex>
   );
 };
