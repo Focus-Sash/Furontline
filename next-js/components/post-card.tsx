@@ -15,12 +15,11 @@ const Post = ({ postData }: any) => {
   return (
     <>
       <Box
-        borderWidth={"1px 1px 1px 1px"}
-        borderStyle={"solid"}
         borderRadius={"10px"}
         p={"2px 2px 30px 30px"}
         mt={"20px"}
         mb={"20px"}
+        bgColor={"rgba(255, 255, 255, 1)"}
       >
         <Text textColor={"gray.500"}>2022-05-27</Text>
         <Text

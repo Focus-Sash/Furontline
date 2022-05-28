@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import { SearchIcon } from "@chakra-ui/icons";
+import { SearchIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Flex,
   Center,
@@ -9,6 +9,11 @@ import {
   Image,
   Text,
   Link,
+  Menu,
+  MenuButton,
+  Button,
+  MenuItem,
+  MenuList,
 } from "@chakra-ui/react";
 
 import { POST_SIDE_COLOR, TOPBAR_HEIGHT } from "../lib/constants";
@@ -16,18 +21,43 @@ import { POST_SIDE_COLOR, TOPBAR_HEIGHT } from "../lib/constants";
 interface NavItemProps {
   id: string;
   link: string;
+  isPulldown: boolean;
   children?: React.ReactNode;
 }
 
 const navItems: NavItemProps[] = [
-  { id: "トップ", link: "/" },
-  { id: "投稿", link: "/reviews" },
-  { id: "タグ一覧", link: "/tags" },
-  { id: "このブログについて", link: "/about" },
+  { id: "トップ", link: "/", isPulldown: false },
+  { id: "投稿", link: "/reviews", isPulldown: true },
+  { id: "タグ一覧（未実装）", link: "/tags", isPulldown: false },
+  { id: "このブログについて", link: "/about", isPulldown: false },
 ];
 
-const NavItem = ({ id, link }: NavItemProps): JSX.Element => {
-  return (
+const NavItem = ({ id, link, isPulldown }: NavItemProps): JSX.Element => {
+  return isPulldown ? (
+    <Menu>
+      <MenuButton
+        as={Button}
+        rightIcon={<ChevronDownIcon />}
+        fontSize={"14px"}
+        fontFamily={"Yu Gothic"}
+        fontWeight={"500"}
+        boxShadow={"none"}
+        border={"none"}
+        iconSpacing={"4px"}
+        bgColor={"white"}
+        color={"#777777"}
+        autoSelect={false}
+        _focus={{ boxShadow: "none", background: "white" }}
+        _hover={{ textDecorationThickness: "1px", textUnderlineOffset: "5px" }}
+      >
+        {id}
+      </MenuButton>
+      <MenuList>
+        <MenuItem boxShadow={"none"} border={"none"} bg={"#FFFFFF"}>Download</MenuItem>
+        <MenuItem boxShadow={"none"} border={"none"} bg={"#FFFFFF"}>Execute</MenuItem>
+      </MenuList>
+    </Menu>
+  ) : (
     <NextLink href={link} passHref>
       <Link
         ml="14px"
@@ -50,7 +80,7 @@ export const TopBar = (): JSX.Element => {
     <Flex
       bg={"white"}
       color={"#777777"}
-      opacity={"95%"}
+      opacity={"10%"}
       position="fixed"
       width={"100%"}
       height={TOPBAR_HEIGHT}
@@ -60,22 +90,33 @@ export const TopBar = (): JSX.Element => {
       justifyContent="space-between"
     >
       <Flex _focus={{ boxShadow: "none" }}>
-        {[<NextLink href={"/"} passHref key={"top"}>
-      <Link
-        ml={"20px"}
-        mr={"14px"}
-        fontSize={"22px"}
-        fontFamily={`"Trebuchet MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
-        fontWeight={"600"}
-        _hover={{ textDecoration: "none", textUnderlineOffset: "5px", textDecorationColor: "#777777"}}
-        _focus={{ boxShadow: "none" }}
-      >
-        <Text margin={0}>FURONtier</Text>
-      </Link>
-    </NextLink>].concat(
+        {[
+          <NextLink href={"/"} passHref key={"top"}>
+            <Link
+              ml={"20px"}
+              mr={"14px"}
+              fontSize={"22px"}
+              fontFamily={`"Trebuchet MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
+              fontWeight={"600"}
+              _hover={{
+                textDecoration: "none",
+                textUnderlineOffset: "5px",
+                textDecorationColor: "#777777",
+              }}
+              _focus={{ boxShadow: "none" }}
+            >
+              <Text margin={0}>FURONtier*</Text>
+            </Link>
+          </NextLink>,
+        ].concat(
           navItems.map((navItem) => {
             return (
-              <NavItem id={navItem.id} link={navItem.link} key={navItem.id}>
+              <NavItem
+                id={navItem.id}
+                link={navItem.link}
+                isPulldown={navItem.isPulldown}
+                key={navItem.id}
+              >
                 {navItem.id}
               </NavItem>
             );

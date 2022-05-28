@@ -16,6 +16,7 @@ import NextLink from "next/link";
 import { getSortedPostsData } from "../lib/posts";
 import { TopBar } from "../components/topbar";
 import Post from "../components/post-card";
+import Footer from "../components/footer";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -31,7 +32,7 @@ export default function Home({ allPostsData }: any) {
   return (
     <>
       <Head>
-        <title>感想 - ふろんてぃあ*</title>
+        <title>作品感想 - ふろんてぃあ*</title>
       </Head>
       <TopBar />
       <Flex
@@ -43,12 +44,11 @@ export default function Home({ allPostsData }: any) {
         backgroundPosition={"bottom"}
         backgroundSize={"cover"}
       >
-        <Container maxW="1080px" bgColor={"white"} opacity={"95%"}>
-        <Container maxW="640px" bgColor={"white"}>
+        <Container maxW="960px" bgColor={"rgba(255, 255, 255, 0.9)"} mb={"30px"}>
+        <Container maxW="640px" bgColor={"rgba(255, 255, 255, 0)"}>
           <Main allPostsData={allPostsData} />
         </Container>
         </Container>
-        <Box color={"white"}></Box>
       </Flex>
     </>
   );
