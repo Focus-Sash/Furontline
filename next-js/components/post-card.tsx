@@ -16,6 +16,8 @@ const Post = ({ postData }: any) => {
     <>
       <Box
         borderRadius={"10px"}
+        borderStyle="solid"
+        borderWidth="1px"
         p={"2px 2px 30px 30px"}
         mt={"20px"}
         mb={"20px"}
@@ -25,7 +27,7 @@ const Post = ({ postData }: any) => {
         <Text
           fontSize={"20px"}
           fontFamily={
-            "-apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', '游ゴシック Medium', meiryo, sans-serif"
+            "'Helvetica Neue', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', meiryo, sans-serif"
           }
           fontWeight={"bold"}
           mt={"-10px"}
@@ -43,6 +45,7 @@ const Post = ({ postData }: any) => {
             w={"80px"}
             h={"80px"}
             borderRadius={"10px"}
+            alt={"thumbnail"}
           />
           <Text
             color={"gray.500"}

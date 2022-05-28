@@ -9,6 +9,7 @@ import {
   Image,
   Text,
   Link,
+  Box,
   Menu,
   MenuButton,
   Button,
@@ -17,57 +18,35 @@ import {
 } from "@chakra-ui/react";
 
 import { POST_SIDE_COLOR, TOPBAR_HEIGHT } from "../lib/constants";
+import LogoToHome from "./topbar/home-logo";
+import PostMenu from "./topbar/post-menu";
+import Post from "../pages/posts/[id]";
 
 interface NavItemProps {
   id: string;
   link: string;
-  isPulldown: boolean;
   children?: React.ReactNode;
 }
 
 const navItems: NavItemProps[] = [
-  { id: "トップ", link: "/", isPulldown: false },
-  { id: "投稿", link: "/reviews", isPulldown: true },
-  { id: "タグ一覧（未実装）", link: "/tags", isPulldown: false },
-  { id: "このブログについて", link: "/about", isPulldown: false },
+  { id: "タグ一覧（未実装）", link: "/tags" },
+  { id: "このブログについて", link: "/about" },
 ];
 
-const NavItem = ({ id, link, isPulldown }: NavItemProps): JSX.Element => {
-  return isPulldown ? (
-    <Menu>
-      <MenuButton
-        as={Button}
-        rightIcon={<ChevronDownIcon />}
-        fontSize={"14px"}
-        fontFamily={"Yu Gothic"}
-        fontWeight={"500"}
-        boxShadow={"none"}
-        border={"none"}
-        iconSpacing={"4px"}
-        bgColor={"white"}
-        color={"#777777"}
-        autoSelect={false}
-        _focus={{ boxShadow: "none", background: "white" }}
-        _hover={{ textDecorationThickness: "1px", textUnderlineOffset: "5px" }}
-      >
-        {id}
-      </MenuButton>
-      <MenuList>
-        <MenuItem boxShadow={"none"} border={"none"} bg={"#FFFFFF"}>Download</MenuItem>
-        <MenuItem boxShadow={"none"} border={"none"} bg={"#FFFFFF"}>Execute</MenuItem>
-      </MenuList>
-    </Menu>
-  ) : (
+const NavItem = ({ id, link }: NavItemProps): JSX.Element => {
+  return (
     <NextLink href={link} passHref>
       <Link
-        ml="14px"
-        mr="14px"
+        pl="14px"
+        pr="10px"
+        pt="14px"
+        pb="14px"
+        maxH="49px"
         fontSize={"14px"}
-        fontFamily={"Yu Gothic"}
+        fontFamily={`"Yu Gothic", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
         fontWeight={"500"}
-        _hover={{ textDecorationThickness: "1px", textUnderlineOffset: "5px" }}
+        _hover={{ backgroundColor: "#CCCCCC", textDecoration: "none" }}
         _focus={{ boxShadow: "none" }}
-        mt={"8px"}
       >
         <Text margin={0}>{id}</Text>
       </Link>
@@ -78,43 +57,22 @@ const NavItem = ({ id, link, isPulldown }: NavItemProps): JSX.Element => {
 export const TopBar = (): JSX.Element => {
   return (
     <Flex
-      bg={"white"}
       color={"#777777"}
-      opacity={"10%"}
+      bg={"#F8F8F8"}
       position="fixed"
       width={"100%"}
       height={TOPBAR_HEIGHT}
       zIndex={200}
-      alignItems={"center"}
       fontFamily={`"Helvetica Neue", "Helvetica", "Arial", sans-serif`}
       justifyContent="space-between"
     >
       <Flex _focus={{ boxShadow: "none" }}>
-        {[
-          <NextLink href={"/"} passHref key={"top"}>
-            <Link
-              ml={"20px"}
-              mr={"14px"}
-              fontSize={"22px"}
-              fontFamily={`"Trebuchet MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
-              fontWeight={"600"}
-              _hover={{
-                textDecoration: "none",
-                textUnderlineOffset: "5px",
-                textDecorationColor: "#777777",
-              }}
-              _focus={{ boxShadow: "none" }}
-            >
-              <Text margin={0}>FURONtier*</Text>
-            </Link>
-          </NextLink>,
-        ].concat(
+        {[<LogoToHome key={"home"} />, <PostMenu key={"top"}/>].concat(
           navItems.map((navItem) => {
             return (
               <NavItem
                 id={navItem.id}
                 link={navItem.link}
-                isPulldown={navItem.isPulldown}
                 key={navItem.id}
               >
                 {navItem.id}
@@ -244,7 +202,7 @@ const TopLink = (): JSX.Element => {
 
 const DeskTopSearchField = (): JSX.Element => {
   return (
-    <InputGroup size="sm" width="auto" pr="20px">
+    <InputGroup size="sm" width="auto" pr="20px" mt="8px">
       <Input
         placeholder="サイト内検索（未実装）"
         width={"200px"}

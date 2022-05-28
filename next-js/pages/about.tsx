@@ -2,15 +2,21 @@ import {
   Flex,
   Text,
   Link,
+  Image,
+  Box,
+  useDisclosure,
   Heading,
   Container,
   ListItem,
   UnorderedList,
+  Divider,
 } from "@chakra-ui/react";
 import Head from "next/head";
 import NextLink from "next/link";
 import { getSortedPostsData } from "../lib/posts";
 import { TopBar } from "../components/topbar";
+import Post from "../components/post-card";
+import Footer from "../components/footer";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -22,16 +28,26 @@ export async function getStaticProps() {
 }
 
 export default function Home({ allPostsData }: any) {
+  const { onClose } = useDisclosure();
   return (
     <>
       <Head>
-        <title>このブログについて - ふろんてぃあ*</title>
+        <title>ホーム - ふろんてぃあ*</title>
       </Head>
-
       <TopBar />
-      <Flex paddingTop="calc(33px + 1rem)" w="100vw">
-        <Container maxW="container.sm">
+      <Flex
+        paddingTop="calc(33px + 1rem)"
+        w="100%"
+        backgroundImage={"misc-background.png"}
+        minH={"100vh"}
+        backgroundAttachment={"fixed"}
+        backgroundPosition={"bottom"}
+        backgroundSize={"cover"}
+      >
+        <Container maxW="960px" bgColor={"rgba(255, 255, 255, 0.9)"} mb={"30px"}>
+        <Container maxW="640px" bgColor={"rgba(255, 255, 255, 0)"}>
           <Main allPostsData={allPostsData} />
+        </Container>
         </Container>
       </Flex>
     </>
@@ -55,29 +71,34 @@ const Main = ({
 }) => {
   return (
     <Flex mt="1em" align="left" display={"block"}>
-      <Heading as="h2">About this Page</Heading>
+      <Heading
+        as="h1"
+        textAlign={"center"}
+        fontFamily={`"Yu Gothic", "Century Gothic", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
+        fontWeight={500}
+        mt={"30px"}
+      >
+        このブログについて
+      </Heading>
       <Text
         lineHeight={1.9}
-        fontFamily={`Meiryo","Yu Gothic"," "Hiragino Sans",  "sans-serif"`}
+        fontFamily={`"Yu Gothic", "Meiryo", "Century Gothic", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
         fontSize="16px"
+        fontWeight={500}
+        color={"#555555"}
+        textAlign={"center"}
+        mb={"40px"}
       >
-        ふろん (@Focus_Sash) とふろんてぃあ* (このブログ) の基本情報を書きます。まだ書いてないです。
+        ** 基本情報 **
       </Text>
-      <Heading as="h2">Sample Posts</Heading>
-      {allPostsData.map((postData, index, array) => {
-        return (
-          <NextLink href={`posts/${postData.id}`} passHref key={postData.id}>
-            <Link display="block" fontSize={"20px"} _focus={{ boxShadow: "none" }}>{postData.title}</Link>
-          </NextLink>
-        );
-      })}
-      <Heading>
-        Todo
-      </Heading>
-      <UnorderedList>
-        <ListItem>書く</ListItem>
-        <ListItem>このページのレイアウトを整える</ListItem>
-      </UnorderedList>
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
     </Flex>
   );
 };
+
+
