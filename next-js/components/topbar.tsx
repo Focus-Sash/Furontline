@@ -58,7 +58,7 @@ export const TopBar = (): JSX.Element => {
   return (
     <Flex
       color={"#777777"}
-      bg={"#F8F8F8"}
+      bg={"#F5F5F5"}
       position="fixed"
       width={"100%"}
       height={TOPBAR_HEIGHT}

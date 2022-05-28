@@ -1,4 +1,5 @@
-import { Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Container, Flex, Heading, Text, Box } from "@chakra-ui/react";
+import { MAIN_COLOR_RGB } from "../lib/constants";
 import { TopBar } from "./topbar";
 
 interface PageHeadProps {
@@ -9,6 +10,7 @@ interface PageHeadProps {
 const PageHead = ({ head, summary }: PageHeadProps): JSX.Element => {
   return (
     <>
+      <Flex alignItems={"center"} flexDir="column">
       <Heading
         as="h1"
         textAlign={"center"}
@@ -18,6 +20,7 @@ const PageHead = ({ head, summary }: PageHeadProps): JSX.Element => {
       >
         {head}
       </Heading>
+      <Box bgColor={MAIN_COLOR_RGB} width="20px" height="8px" borderStyle="none" borderRadius="5px" mt="20px" mb="20px" />
       <Text
         lineHeight={1.9}
         fontFamily={`"Yu Gothic", "Meiryo", "Century Gothic", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
@@ -26,9 +29,11 @@ const PageHead = ({ head, summary }: PageHeadProps): JSX.Element => {
         color={"#555555"}
         textAlign={"center"}
         mb={"40px"}
+        mt={"0px"}
       >
         {summary}
       </Text>
+      </Flex>
     </>
   );
 };
@@ -58,7 +63,7 @@ function Page({ allPostsData, head, summary, pageContent }: pageData) {
           bgColor={"rgba(255, 255, 255, 1)"}
           mb={"30px"}
         >
-          <Container maxW="640px" bgColor={"rgba(255, 255, 255, 0)"}>
+          <Container maxW="640px" bgColor={"white"}>
             <Main
               allPostsData={allPostsData}
               head={head}
@@ -71,12 +76,6 @@ function Page({ allPostsData, head, summary, pageContent }: pageData) {
     </>
   );
 }
-
-type PostData = {
-  id: string;
-  date: string;
-  title: string;
-};
 
 interface mainData {
   allPostsData: any;

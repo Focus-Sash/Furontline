@@ -25,7 +25,7 @@ const Reviews = ({allPostsData}: any) => {
       <Page
       allPostsData={allPostsData}
       head="作品感想"
-      summary="** 読んだ本や見た作品の感想 **"
+      summary="** 触れた作品の感想 **"
       pageContent={PageContent}
     />
       </>

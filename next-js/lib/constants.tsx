@@ -1,4 +1,4 @@
-export const MAIN_COLOR_RGB: string = "#1376D1";
+export const MAIN_COLOR_RGB: string = "#1111CC";
 // export const MAIN_COLOR_RGB: string = "#D63914";
 export const POST_BG_COLOR: string = "#FFFFFF";
 export const POST_SIDE_COLOR: string = "#F5F5F5";

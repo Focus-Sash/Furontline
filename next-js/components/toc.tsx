@@ -3,6 +3,8 @@ import { Flex } from "@chakra-ui/react";
 
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
+import { MAIN_COLOR_RGB, POST_SIDE_COLOR } from "../lib/constants";
+
 export interface TocContentId {
   id: string;
   content: string;
@@ -46,7 +48,7 @@ const Toc = ({ toc, activeItemId }: TocProps): JSX.Element => {
             pt={"2px"}
             bg={
               id === activeItemId || (null === activeItemId && index === 0)
-                ? "#D3F3FA"
+                ? "#DDDDFF"
                 : "FFFFFF"
             }
             borderStyle="solid"
@@ -60,8 +62,8 @@ const Toc = ({ toc, activeItemId }: TocProps): JSX.Element => {
             }
             borderLeftColor={
               id === activeItemId || (null === activeItemId && index === 0)
-                ? "#1376D1"
-                : "#F5F5F5"
+                ? MAIN_COLOR_RGB
+                : POST_SIDE_COLOR
             }
             mb={type === 1 ? "10px" : "0px"}
             pr="15px"
