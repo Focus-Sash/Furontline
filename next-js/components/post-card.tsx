@@ -1,70 +1,57 @@
-import {
-  Center,
-  Box,
-  useColorModeValue,
-  Stack,
-  Heading,
-  Avatar,
-  Image,
-  Text,
-  HStack,
-} from "@chakra-ui/react";
-import { MAIN_COLOR_RGB } from "../lib/constants";
+import { Box, Text, Link, Icon } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { AiOutlineCalendar } from "react-icons/ai";
+import { FONT_FAMILY } from "../lib/constants";
 
-const Post = ({ postData }: any) => {
+const PostCard = ({ postData }: any) => {
   return (
     <>
       <Box
-        borderRadius={"10px"}
-        borderStyle="solid"
         borderWidth="1px"
-        p={"2px 2px 30px 30px"}
-        mt={"20px"}
-        mb={"20px"}
-        bgColor={"rgba(255, 255, 255, 1)"}
+        borderColor="#BBBBBB"
+        borderRadius={".5rem"}
+        pl="2rem"
+        pt="1rem"
+        pb="1rem"
+        mt="2rem"
+        mb="2rem"
+        bgColor={"#F8F8F8"}
       >
-        <Text textColor={"gray.500"}>2022-05-27</Text>
+        <Icon
+          as={AiOutlineCalendar}
+          display="inline-block"
+          mr=".2rem"
+          color={"gray.500"}
+          mt="rem"
+          verticalAlign={"middle"}
+        />
         <Text
-          fontSize={"20px"}
-          fontFamily={
-            "'Helvetica Neue', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', meiryo, sans-serif"
-          }
-          fontWeight={"bold"}
-          mt={"-10px"}
-          mb={"30px"}
-          textColor={"#333333"}
+          textColor={"gray.500"}
+          display="inline-block"
+          verticalAlign={"middle"}
         >
-          これはサンプル記事です
+          {postData.date}
         </Text>
+        <NextLink href={`posts/${postData.id}`}>
+          <Link>
+            <Text
+              fontSize={"20px"}
+              fontFamily={FONT_FAMILY}
+              fontWeight={"bold"}
+              textColor={"#333333"}
+              m={0}
+            >
+              {postData.title}
+            </Text>
+          </Link>
+        </NextLink>
 
-        <HStack>
-          <Image
-            src={
-              "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-            }
-            w={"80px"}
-            h={"80px"}
-            borderRadius={"10px"}
-            alt={"thumbnail"}
-          />
-          <Text
-            color={"gray.500"}
-            overflow={"hidden"}
-            noOfLines={3}
-            pl={"10px"}
-            pr={"15px"}
-            fontFamily={
-              "-apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', '游ゴシック Medium', meiryo, sans-serif"
-            }
-          >
-            滲み出す混濁の紋章、不遜なる狂気の器、湧き上がり・否定し・痺れ・瞬き・眠りを妨げる
-            爬行する鉄の王女　絶えず自壊する泥の人形　
-            結合せよ　反発せよ　地に満ち己の無力を知れ　破道の九十・黒棺
-          </Text>
-        </HStack>
+        <Text color={"gray.500"} noOfLines={1} fontFamily={FONT_FAMILY}>
+          {postData.summary}
+        </Text>
       </Box>
     </>
   );
 };
 
-export default Post;
+export default PostCard;

@@ -35,7 +35,10 @@
     "remark-rehype": "^10.1.0",
     "remark-slug": "^7.0.1",
     "unified": "^10.1.2",
-    "unist-util-visit": "^4.1.0"
+    "unist-util-visit": "^4.1.0",
+    "zenn-content-css": "^0.1.113",
+    "zenn-embed-elements": "^0.1.113",
+    "zenn-markdown-html": "^0.1.113"
   },
   "devDependencies": {
     "@types/node": "17.0.33",

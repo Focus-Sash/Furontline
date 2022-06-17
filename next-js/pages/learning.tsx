@@ -1,12 +1,12 @@
 import Head from "next/head";
-import NextLink from "next/link";
-import { getSortedPostsData } from "../lib/posts";
-import Post from "../components/post-card";
-import Footer from "../components/footer";
-import Page from "../components/hub-template";
+import { getCategoryPostsData } from "../lib/posts";
+import PostCard from "../components/post-card";
+import HubPage from "../components/hub-template";
+
+const categoryName: string = "learning";
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+  const allPostsData = getCategoryPostsData(categoryName);
   return {
     props: {
       allPostsData,
@@ -14,35 +14,31 @@ export async function getStaticProps() {
   };
 }
 
-
-const Learning = ({allPostsData}: any) => {
+const Learning = ({ allPostsData }: any) => {
   return (
     <>
-    
-    <Head>
+      <Head>
         <title>{`勉強 - ふろんてぃあ*`}</title>
       </Head>
-      <Page
-      allPostsData={allPostsData}
-      head="勉強"
-      summary="** 勉強したことについて **"
-      pageContent={PageContent}
-    />
-      </>
-    
+      <HubPage
+        allPostsData={allPostsData}
+        head="勉強"
+        summary="勉強したことについて"
+        pageContent={PageContent(allPostsData)}
+      />
+    </>
   );
 };
 
-
-const PageContent: JSX.Element = (
-  <>
-    <Post />
-    <Post />
-    <Post />
-    <Post />
-    <Post />
-    <Post />
-  </>
-);
+const PageContent = (allPostsData: any): JSX.Element => {
+  return (
+    <>
+      {allPostsData.map((postData: any) => {
+        console.log("map", postData);
+        return <PostCard postData={postData} key={postData.id} />;
+      })}
+    </>
+  );
+};
 
 export default Learning;

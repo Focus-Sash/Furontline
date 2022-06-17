@@ -1,19 +1,12 @@
-import {
-  Flex,
-  Text,
-  Link,
-  Heading,
-  Container,
-  ListItem,
-  UnorderedList,
-} from "@chakra-ui/react";
 import Head from "next/head";
 import NextLink from "next/link";
-import { getSortedPostsData } from "../lib/posts";
-import { TopBar } from "../components/topbar";
+import { getAllPostsData } from "../lib/posts";
+import PostCard from "../components/post-card";
+import Footer from "../components/footer";
+import HubPage from "../components/hub-template";
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+  const allPostsData = getAllPostsData();
   return {
     props: {
       allPostsData,
@@ -21,63 +14,31 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ allPostsData }: any) {
+const Home = ({ allPostsData }: any) => {
   return (
     <>
       <Head>
-        <title>タグ一覧 - ふろんてぃあ*</title>
+        <title>{`トップ - ふろんてぃあ*`}</title>
       </Head>
-
-      <TopBar />
-      <Flex paddingTop="calc(33px + 1rem)" w="100vw">
-        <Container maxW="container.sm">
-          <Main allPostsData={allPostsData} />
-        </Container>
-      </Flex>
+      <HubPage
+        allPostsData={allPostsData}
+        head="ふろんてぃあ*"
+        summary="ふろんの個人ブログ"
+        pageContent={PageContent}
+      />
     </>
   );
-}
-
-type PostData = {
-  id: string;
-  date: string;
-  title: string;
 };
 
-type MultiplePostsData = {
-  a: PostData[];
-};
+const PageContent: JSX.Element = (
+  <>
+    <PostCard />
+    <PostCard />
+    <PostCard />
+    <PostCard />
+    <PostCard />
+    <PostCard />
+  </>
+);
 
-const Main = ({
-  allPostsData,
-}: {
-  allPostsData: { id: string; date: string; title: string }[];
-}) => {
-  return (
-    <Flex mt="1em" align="left" display={"block"}>
-      <Heading as="h2">About this Page</Heading>
-      <Text
-        lineHeight={1.9}
-        fontFamily={`Meiryo","Yu Gothic"," "Hiragino Sans",  "sans-serif"`}
-        fontSize="16px"
-      >
-        ブログ記事のタグ一覧です。まだタグ機能は実装されていません。
-      </Text>
-      <Heading as="h2">Sample Posts</Heading>
-      {allPostsData.map((postData, index, array) => {
-        return (
-          <NextLink href={`posts/${postData.id}`} passHref key={postData.id}>
-            <Link display="block" fontSize={"20px"} _focus={{ boxShadow: "none" }}>{postData.title}</Link>
-          </NextLink>
-        );
-      })}
-      <Heading>
-        Todo
-      </Heading>
-      <UnorderedList>
-        <ListItem>タグ機能を実装する</ListItem>
-        <ListItem>このページのレイアウトを整える</ListItem>
-      </UnorderedList>
-    </Flex>
-  );
-};
+export default Home;

@@ -1,7 +1,7 @@
 import { Box, Text, Icon, Link, Flex, textDecoration } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { TOPBAR_HEIGHT } from "../../lib/constants";
+import { TOPBAR_BG_COLOR, TOPBAR_HEIGHT } from "../../lib/constants";
 
 interface NavItemProps {
   id: string;
@@ -10,30 +10,27 @@ interface NavItemProps {
 }
 
 const postItems: NavItemProps[] = [
-  { id: "日記", link: "/diary" },
-  
+  { id: "日記", link: "/diaries" },
+
   { id: "勉強", link: "/learning" },
-  { id: "雑記", link: "/misc" },
   { id: "作品感想", link: "/reviews" },
-  {id: "投稿一覧", link: "/posts"}
+  { id: "雑記", link: "/misc" },
 ];
 
 const PostMenu = (): JSX.Element => {
   return (
     <Flex flexDir={"column"} role="group">
-      <Flex fontSize={"14px"}
-      pl="14px"
-      pr="14px"
+      <Flex
+        fontSize={"14px"}
+        pl="14px"
+        pr="14px"
         fontFamily={`"Yu Gothic", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
         fontWeight={"500"}
-        _hover={{ backgroundColor: "#CCCCCC", textDecoration: "none" }}
-        _groupHover={{ backgroundColor: "#CCCCCC" }}>
-      <Text
-        
+        _hover={{ backgroundColor: "#333333", textDecoration: "none" }}
+        _groupHover={{ backgroundColor: "#333333" }}
       >
-        投稿
-      </Text>
-      <ChevronDownIcon color={"777777"} mt="17px" ml="2px"/>
+        <Text>投稿</Text>
+        <ChevronDownIcon color={"777777"} mt="17px" ml="2px" />
       </Flex>
       <Flex
         position={"absolute"}
@@ -50,13 +47,7 @@ const PostMenu = (): JSX.Element => {
 
 const PostDropDownList = (): JSX.Element => {
   return (
-    <Flex
-      flexDir={"column"}
-      borderStyle="solid"
-      borderWidth="1px"
-      borderColor={"#CCCCCC"}
-      bg={"#F8F8F8"}
-    >
+    <Flex flexDir={"column"} bg={TOPBAR_BG_COLOR}>
       {postItems.map((postItem) => {
         return (
           <PostDropDownElement
@@ -78,11 +69,10 @@ const PostDropDownElement = ({ id, link }: NavItemProps): JSX.Element => {
         pr="20px"
         pt="10px"
         pb="10px"
-        borderColor="#CCCCCC"
         fontSize="14px"
         fontFamily={`"Yu Gothic", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
         fontWeight={"500"}
-        _hover={{ backgroundColor: "#CCCCCC", textDecoration: "none" }}
+        _hover={{ backgroundColor: "#333333", textDecoration: "none" }}
         _focus={{ boxShadow: "none" }}
       >
         <Flex p={"2px"} pl={"0px"}>

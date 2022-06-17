@@ -1,19 +1,38 @@
-import { MAIN_COLOR_RGB } from "../lib/constants";
-import { Flex } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
+import { FONT_FAMILY } from "../lib/constants";
 
-const DiaryCard = (): JSX.Element => {
+const DiaryCard = ({ postData }: any) => {
   return (
-    <Flex
-      bgColor={"#CCCCCC"}
-      borderRadius="50%"
-      width="200px"
-      height="200px"
-      borderTopStyle={"solid"}
-      borderTopColor={MAIN_COLOR_RGB}
-      borderTopWidth={"2px"}
-    >
-      2022年5月の日記
-    </Flex>
+    <>
+      <Box
+        borderStyle="solid"
+        borderWidth="1px"
+        borderColor="#BBBBBB"
+        pl="30px"
+        mt={"20px"}
+        mb={"20px"}
+        bgColor={"rgba(255, 255, 255, 1)"}
+      >
+        <Text
+          fontSize={"20px"}
+          fontFamily={FONT_FAMILY}
+          fontWeight={"bold"}
+          textColor={"#333333"}
+        >
+          {postData.title}
+        </Text>
+
+        <Text
+          color={"gray.500"}
+          overflow={"hidden"}
+          noOfLines={1}
+          fontFamily={FONT_FAMILY}
+          pr="30px"
+        >
+          {postData.summary}
+        </Text>
+      </Box>
+    </>
   );
 };
 
