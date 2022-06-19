@@ -1,4 +1,4 @@
-import { getAllPostsIds, getPostContent } from "../../lib/posts";
+import { getAllPostsId, getPostContent } from "../../lib/posts";
 import {
   Container,
   Box,
@@ -133,7 +133,8 @@ export default function Post({ postData }: any) {
 }
 
 export async function getStaticPaths() {
-  const paths = getAllPostsIds();
+  const paths = getAllPostsId();
+  console.log("getStaticPaths", paths);
   return {
     paths,
     fallback: false,

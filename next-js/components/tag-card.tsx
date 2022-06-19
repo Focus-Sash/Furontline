@@ -26,7 +26,6 @@ const TagCard = ({ tagName }: any) => {
             <Text
               fontSize={"20px"}
               fontFamily={FONT_FAMILY}
-              fontWeight={"bold"}
               textColor={"#333333"}
               display={"inline-block"}
               verticalAlign={"middle"}

@@ -41,9 +41,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: any) {
-  console.log(params.tag);
   const postData = await getTagPostData(params.tag);
-  console.log(postData);
   return {
     props: {
       data: {

@@ -38,6 +38,20 @@ function getPostDataFromPaths(filePaths: string[], searchDir: string): any[] {
   });
 }
 
+function getPostIdFromPaths(filePaths: string[], searchDir: string): any[] {
+  // 各投稿のデータをもつオブジェクトを取得する
+  return filePaths.map((fileName) => {
+    const fullPath = path.join(searchDir, fileName);
+
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const matterResult = matter(fileContents);
+
+    console.assert(matterResult.data !== undefined, "Post Date not set");
+
+    return { params: { id: matterResult.data.id } };
+  });
+}
+
 export const getPostDataFromTag = (
   filePaths: string[],
   searchDir: string,
@@ -151,6 +165,31 @@ export const getAllTags = (): string[] => {
   return getTagsFromPaths(filePaths, searchDir);
 };
 
+export const getAllPostsId = (): any[] => {
+  const searchDir = postsDir;
+  const tmpFileNames: string[] = fs.readdirSync(searchDir);
+  const filePaths: string[] = [];
+  tmpFileNames.forEach((fileName) => {
+    if (fileName.length > 3 && fileName.slice(-3) === ".md") {
+      filePaths.push(fileName);
+    }
+  });
+
+  CATEGORY_NAME_LIST.forEach((categoryName) => {
+    const categoryDir = path.join(process.cwd(), `posts/${categoryName}`);
+    const tmpFileNames: string[] = fs.readdirSync(categoryDir);
+
+    tmpFileNames.forEach((fileName) => {
+      if (fileName.length > 3 && fileName.slice(-3) === ".md") {
+        const filePath: string = categoryName.concat("/", fileName);
+        filePaths.push(filePath);
+      }
+    });
+  });
+
+  return getPostIdFromPaths(filePaths, searchDir);
+};
+
 export function getAllPostsData() {
   const searchDir = postsDir;
   const tmpFileNames: string[] = fs.readdirSync(searchDir);
@@ -172,25 +211,6 @@ export function getAllPostsData() {
     });
   });
   return getPostDataFromPaths(filePaths, searchDir);
-}
-
-export function getAllPostsIds() {
-  const tmpFileNames = fs.readdirSync(postsDir);
-  console.log("getAllpostsId", tmpFileNames);
-  const fileNames: string[] = [];
-  for (let i = 0; i < tmpFileNames.length; i++) {
-    if (tmpFileNames[i].length > 3 && tmpFileNames[i].slice(-3) === ".md") {
-      fileNames.push(tmpFileNames[i]);
-    }
-  }
-
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, ""),
-      },
-    };
-  });
 }
 
 export async function getPostContent(id: string) {
