@@ -1,42 +1,13 @@
 ---
-title: 'このブログについて'
-summary: 'このブログに関する基本情報です'
-date: '2099-12-31'
+title: 'nand2tetrisをRustでやってみる'
+summary: 'Rustを勉強してみたので、せっかくなのでなんか作ろうと思った'
+date: '2022-06-19'
 tags: 
-  - 'Makings'
-  - 'Blog'
-id: 'about-this-blog'
-category: 'makings'
+  - 'Computer Science'
+id: 'nand2tetris-rust'
+category: 'learning'
 ---
 
-ふろん (TwitterID: Focus_Sash) の個人ブログです。
+## はじめに
 
-## 管理人について
-
-ふろんです。学生です。
-
-## カテゴリー説明
-
-### 日記
-
-日記です。１日に数行書きたいです。
-
-### 勉強
-
-勉強したことについて書きます。数学・プログラミング・英語が主です。
-
-### 雑記
-
-どのカテゴリーにも当てはまらない記事を置きます。
-
-### 作品感想
-
-読んだり見たりプレイしたりした作品の感想を書きます。小説・マンガ・アニメ・映画・ゲーム・実用書など。
-
-## 連絡先
-
-記事の感想・バグ報告・要望などは管理人のTwitter (@Focus_Sash) までお願いします。コメント機能を実装する予定はいまのところありません。
-
-:::info
-メッセージ
-:::
+[nand2tetris](https://github.com/jherskow/nand2tetris/blob/master/nand2tetris%20BOOK.pdf)という本があります。NANDゲートからはじめて、コンピュータ（のエミュレータ）をゼロから作ろうという本です。前々から読んでみたいと思ってたんですが、最近Rustを勉強したので、せっかくなのでRustで実装しながら読んでみようと思いました。
