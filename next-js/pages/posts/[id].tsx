@@ -8,11 +8,10 @@ import {
   Text,
   Link,
 } from "@chakra-ui/react";
-import { AiFillTag, AiOutlineTag } from "react-icons/ai";
+import { AiOutlineTag } from "react-icons/ai";
 import Head from "next/head";
 import NextLink from "next/link";
 import { TopBar, TopBuffer } from "../../components/topbar/topbar";
-import extractToc from "../../lib/get-toc";
 import Footer from "../../components/footer";
 import {
   FONT_FAMILY,
@@ -30,9 +29,11 @@ const PostHeader = ({ postData }: any): JSX.Element => {
       <Heading as="h1" zIndex="100" fontWeight="600" fontFamily={FONT_FAMILY}>
         {postData.title}
       </Heading>
-      {postData.tags.map((tagName: any) => {
-        return <Tag tagName={tagName} key={tagName} />;
-      })}
+      {postData.tags === null
+        ? undefined
+        : postData.tags.map((tagName: any) => {
+            return <Tag tagName={tagName} key={tagName} />;
+          })}
     </Box>
   );
 };

@@ -1,7 +1,7 @@
 import { getAllDiariesIds, getDiaryData } from "../../lib/diary";
 import { Container, Box, Flex } from "@chakra-ui/react";
 import Head from "next/head";
-import { TopBar, TopBuffer } from "../../components/topbar";
+import { TopBar, TopBuffer } from "../../components/topbar/topbar";
 import extractToc from "../../lib/get-toc";
 import ScrollToc from "../../components/scroll-toc";
 
@@ -35,7 +35,9 @@ export default function Diary({ postData: diaryData }: any) {
               // overflow: hiddenとしないと、最後の行の下の行間が溢れる。
               // 内部的には<p>になってるはずで、そのマージンがcontainerを経由して溢れる
             >
-              <div dangerouslySetInnerHTML={{ __html: diaryData.contentHtml }} />
+              <div
+                dangerouslySetInnerHTML={{ __html: diaryData.contentHtml }}
+              />
             </Container>
             <Flex
               position="sticky"

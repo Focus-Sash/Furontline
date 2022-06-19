@@ -4,13 +4,14 @@ import matter from "gray-matter";
 import { CATEGORY_NAME_LIST, FOOTER_CONTENTS_COLOR } from "./constants";
 import markdownToHtml from "zenn-markdown-html";
 import { jsx } from "@emotion/react";
+import { forEach } from "lodash";
 
 const postsDir = path.join(process.cwd(), "posts");
 
 // path -> [array of data of each file in the path]
 function getPostDataFromPaths(filePaths: string[], searchDir: string): any[] {
   // 各投稿のデータをもつオブジェクトを取得する
-  const categoryPostsData = filePaths.map((fileName) => {
+  const pathPostsData = filePaths.map((fileName) => {
     const postId = fileName.replace(/\.md$/, "");
     const fullPath = path.join(searchDir, fileName);
 
@@ -26,7 +27,7 @@ function getPostDataFromPaths(filePaths: string[], searchDir: string): any[] {
   });
 
   // 日付順にソートして返す
-  return categoryPostsData.sort((a: any, b: any) => {
+  return pathPostsData.sort((a: any, b: any) => {
     if (a.date < b.date) {
       return 1;
     } else if (a.date > b.date) {
@@ -35,6 +36,57 @@ function getPostDataFromPaths(filePaths: string[], searchDir: string): any[] {
       return 0;
     }
   });
+}
+
+export const getPostDataFromTag = (
+  filePaths: string[],
+  searchDir: string,
+  tag: string
+): any[] => {
+  const pathPostsData = filePaths
+    .map((fileName) => {
+      const postId = fileName.replace(/\.md$/, "");
+      const fullPath = path.join(searchDir, fileName);
+
+      const fileContents = fs.readFileSync(fullPath, "utf8");
+      const matterResult = matter(fileContents);
+
+      return {
+        id: postId,
+        ...matterResult.data,
+      };
+    })
+    .filter((postData: any) => {
+      return postData.tags && postData.tags.includes(tag);
+    });
+
+  // 日付順にソートして返す
+  return pathPostsData.sort((a: any, b: any) => {
+    if (a.date < b.date) {
+      return 1;
+    } else if (a.date > b.date) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+};
+
+function getTagsFromPaths(filePaths: string[], searchDir: string): string[] {
+  const tagList: any[] = [];
+  filePaths.map((fileName) => {
+    const fullPath = path.join(searchDir, fileName);
+
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const matterResult = matter(fileContents);
+    if (matterResult.data.tags !== null) {
+      matterResult.data.tags.forEach((tagName: any) => {
+        tagList.push({ params: { tag: tagName } });
+      });
+    }
+  });
+
+  return Array.from(new Set(tagList));
 }
 
 export function getCategoryPostsData(category: string) {
@@ -72,7 +124,31 @@ export const getTagPostData = (tag: string) => {
       }
     });
   });
-  return getPostDataFromPaths(filePaths, searchDir);
+  return getPostDataFromTag(filePaths, searchDir, tag);
+};
+
+export const getAllTags = (): string[] => {
+  const searchDir = postsDir;
+  const tmpFileNames: string[] = fs.readdirSync(searchDir);
+  const filePaths: string[] = [];
+  tmpFileNames.forEach((fileName) => {
+    if (fileName.length > 3 && fileName.slice(-3) === ".md") {
+      filePaths.push(fileName);
+    }
+  });
+
+  CATEGORY_NAME_LIST.forEach((categoryName) => {
+    const categoryDir = path.join(process.cwd(), `posts/${categoryName}`);
+    const tmpFileNames: string[] = fs.readdirSync(categoryDir);
+    tmpFileNames.forEach((fileName) => {
+      if (fileName.length > 3 && fileName.slice(-3) === ".md") {
+        const filePath: string = categoryName.concat("/", fileName);
+        filePaths.push(filePath);
+      }
+    });
+  });
+
+  return getTagsFromPaths(filePaths, searchDir);
 };
 
 export function getAllPostsData() {
@@ -100,6 +176,7 @@ export function getAllPostsData() {
 
 export function getAllPostsIds() {
   const tmpFileNames = fs.readdirSync(postsDir);
+  console.log("getAllpostsId", tmpFileNames);
   const fileNames: string[] = [];
   for (let i = 0; i < tmpFileNames.length; i++) {
     if (tmpFileNames[i].length > 3 && tmpFileNames[i].slice(-3) === ".md") {

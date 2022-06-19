@@ -33,7 +33,6 @@ const PageContent = (allPostsData: any): JSX.Element => {
   return (
     <>
       {allPostsData.map((postData: any) => {
-        console.log("map", postData);
         return <PostCard postData={postData} key={postData.id} />;
       })}
     </>

@@ -28,7 +28,7 @@ interface NavItemProps {
 }
 
 const navItems: NavItemProps[] = [
-  { id: "タグ一覧（未実装）", link: "/tags" },
+  { id: "タグ一覧", link: "/tags/tag-list" },
   { id: "このブログについて", link: "/posts/about-this-blog" },
 ];
 
