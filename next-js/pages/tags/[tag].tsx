@@ -35,7 +35,6 @@ export default TagPage;
 
 export async function getStaticPaths() {
   const tags = getAllTags();
-  console.log("getStaticpaths", tags);
   return {
     paths: changeTagstoParams(tags),
     fallback: false,
@@ -43,9 +42,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: any) {
-  console.log("getStaticProps", params.tag);
   const postData = await getPostMetaDataArrayWithTag(params.tag);
-  console.log("getStaticProps", postData);
   return {
     props: {
       data: {

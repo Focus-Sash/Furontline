@@ -2,14 +2,14 @@ import fs from "fs";
 import matter from "gray-matter";
 import { getPostIdFromPostPath, getAllPostPaths } from "./posts";
 
-const getTagsFrompostPath = (postPath: string): string[] => {
+const getTagsFromPostPath = (postPath: string): string[] => {
   const fileContents = fs.readFileSync(postPath, "utf8");
   const matterResult = matter(fileContents);
   return matterResult.data.tags;
 };
 
 const hasTag = (postPath: string, tag: string): boolean => {
-  const tags = getTagsFrompostPath(postPath);
+  const tags = getTagsFromPostPath(postPath);
   return tags && tags.includes(tag);
 };
 
@@ -35,7 +35,10 @@ export async function getPostMetaDataArrayWithTag(tag: string) {
 export const getAllTags = (): string[] => {
   const tags: string[] = [];
   const paths: string[] = getAllPostPaths();
-  paths.forEach((path) => tags.push(...getTagsFrompostPath(path)));
+  paths.forEach((path) => {
+    const tmp = getTagsFromPostPath(path);
+    if (tmp != null) tags.push(...tmp);
+  });
 
   return Array.from(new Set(tags));
 };

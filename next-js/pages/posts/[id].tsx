@@ -111,6 +111,7 @@ export default function Post({ postData }: any) {
             <Container
               color={"#333333"}
               maxW="900px"
+              minW="600px"
               minH="100vh"
               p="30px"
               lineHeight={1.9}

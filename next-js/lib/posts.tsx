@@ -116,6 +116,5 @@ export const changeTagstoParams = (tags: any[]): any[] => {
   tags.forEach((tag) => {
     res.push({ params: { tag: tag } });
   });
-  console.log(res);
   return res;
 };
