@@ -1,17 +1,17 @@
 import Head from "next/head";
-import NextLink from "next/link";
-import { getCategoryPostsData } from "../lib/posts";
+import { getPostMetaDataArrayInDirPath, toFullPath } from "../lib/posts";
 import PostCard from "../components/post-card";
-import Footer from "../components/footer";
 import HubPage from "../components/hub-template";
 
-const categoryName: string = "misc";
+const categoryName: string = "posts/misc";
 
 export async function getStaticProps() {
-  const allPostsData = getCategoryPostsData(categoryName);
+  const categoryPostsData = getPostMetaDataArrayInDirPath(
+    toFullPath(categoryName)
+  );
   return {
     props: {
-      allPostsData,
+      allPostsData: categoryPostsData,
     },
   };
 }

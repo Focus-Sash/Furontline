@@ -3,9 +3,8 @@ title: 'このブログについて'
 summary: 'このブログに関する基本情報です'
 date: '2099-12-31'
 tags: 
-  - 'Makings'
-  - 'Blog'
-id: 'about-this-blog'
+  - '制作'
+  - 'ふろんてぃあ*'
 category: 'makings'
 ---
 

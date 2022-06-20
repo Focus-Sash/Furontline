@@ -10,9 +10,10 @@ export const FOOTER_BG_COLOR: string = "#EAE9D9";
 export const FOOTER_CONTENTS_COLOR: string = "#555555";
 export const FONT_FAMILY: string = `"Helvetica Neue", "Helvetica", "Yu Gothic Medium", "Meiryo",  "Arial", sans-serif`;
 
-export const CATEGORY_NAME_LIST: string[] = [
-  "diaries",
-  "learning",
-  "misc",
-  "reviews",
+export const SEARCH_DIR_PATH_LIST: string[] = [
+  "posts",
+  "posts/diaries",
+  "posts/learning",
+  "posts/misc",
+  "posts/reviews",
 ];

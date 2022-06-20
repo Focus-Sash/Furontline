@@ -3,8 +3,7 @@ title: '便利ツールまとめ'
 summary: '試してみたもの'
 date: '2022-06-19'
 tags: 
-  - 'Tech'
-id: 'helpful-apps'
+  - '技術'
 category: 'misc'
 ---
 使ってみたツールのうち便利だったものについて書きます。

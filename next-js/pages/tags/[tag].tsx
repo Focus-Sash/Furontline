@@ -1,8 +1,9 @@
-import { getAllTags, getTagPostData } from "../../lib/posts";
+import { getAllTags, getPostMetaDataArrayWithTag } from "../../lib/tags";
 import Head from "next/head";
 import HubPage from "../../components/hub-template";
 import "zenn-content-css";
 import PostCard from "../../components/post-card";
+import { changeTagstoParams } from "../../lib/posts";
 
 const TagPage = ({ data }: any) => {
   return (
@@ -12,8 +13,8 @@ const TagPage = ({ data }: any) => {
       </Head>
       <HubPage
         allPostsData={data.postData}
-        head="雑記"
-        summary=""
+        head={`${data.tag}`}
+        summary={`タグ「${data.tag}」の記事一覧です`}
         pageContent={PageContent(data.postData)}
       />
     </>
@@ -33,15 +34,18 @@ const PageContent = (allPostsData: any): JSX.Element => {
 export default TagPage;
 
 export async function getStaticPaths() {
-  const paths = getAllTags();
+  const tags = getAllTags();
+  console.log("getStaticpaths", tags);
   return {
-    paths: paths,
+    paths: changeTagstoParams(tags),
     fallback: false,
   };
 }
 
 export async function getStaticProps({ params }: any) {
-  const postData = await getTagPostData(params.tag);
+  console.log("getStaticProps", params.tag);
+  const postData = await getPostMetaDataArrayWithTag(params.tag);
+  console.log("getStaticProps", postData);
   return {
     props: {
       data: {

@@ -3,8 +3,8 @@ title: 'nand2tetrisをRustでやってみる'
 summary: 'Rustを勉強してみたので、せっかくなのでなんか作ろうと思った'
 date: '2022-06-19'
 tags: 
-  - 'Computer Science'
-id: 'nand2tetris-rust'
+  - '低レイヤ'
+  - 'Rust'
 category: 'learning'
 ---
 

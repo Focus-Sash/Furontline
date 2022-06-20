@@ -1,15 +1,17 @@
 import Head from "next/head";
-import { getCategoryPostsData } from "../lib/posts";
+import { getPostMetaDataArrayInDirPath, toFullPath } from "../lib/posts";
 import PostCard from "../components/post-card";
 import HubPage from "../components/hub-template";
 
-const categoryName: string = "learning";
+const categoryName: string = "posts/learning";
 
 export async function getStaticProps() {
-  const allPostsData = getCategoryPostsData(categoryName);
+  const categoryPostsData = getPostMetaDataArrayInDirPath(
+    toFullPath(categoryName)
+  );
   return {
     props: {
-      allPostsData,
+      allPostsData: categoryPostsData,
     },
   };
 }

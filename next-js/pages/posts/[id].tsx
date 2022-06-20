@@ -1,4 +1,8 @@
-import { getAllPostsId, getPostContent } from "../../lib/posts";
+import {
+  getAllPostsIds,
+  getPostContent,
+  changeIdstoParams,
+} from "../../lib/posts";
 import {
   Container,
   Box,
@@ -107,6 +111,7 @@ export default function Post({ postData }: any) {
             <Container
               color={"#333333"}
               maxW="900px"
+              minH="100vh"
               p="30px"
               lineHeight={1.9}
               fontFamily={FONT_FAMILY}
@@ -133,10 +138,9 @@ export default function Post({ postData }: any) {
 }
 
 export async function getStaticPaths() {
-  const paths = getAllPostsId();
-  console.log("getStaticPaths", paths);
+  const ids = getAllPostsIds();
   return {
-    paths,
+    paths: changeIdstoParams(ids),
     fallback: false,
   };
 }

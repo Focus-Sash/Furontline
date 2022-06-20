@@ -1,224 +1,100 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { CATEGORY_NAME_LIST, FOOTER_CONTENTS_COLOR } from "./constants";
+import { SEARCH_DIR_PATH_LIST } from "./constants";
 import markdownToHtml from "zenn-markdown-html";
-import { jsx } from "@emotion/react";
+import { assert } from "console";
 import { forEach } from "lodash";
 
-const postsDir = path.join(process.cwd(), "posts");
+// postsDir = next-js/posts
+export const postsTopDir = path.join(process.cwd(), "posts");
 
-// path -> [array of data of each file in the path]
-function getPostDataFromPaths(filePaths: string[], searchDir: string): any[] {
-  // 各投稿のデータをもつオブジェクトを取得する
-  const pathPostsData = filePaths.map((fileName) => {
-    const postId = fileName.replace(/\.md$/, "");
-    const fullPath = path.join(searchDir, fileName);
+// 基本的にすべてパスで処理して、idが必要なときだけ加工する
 
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const matterResult = matter(fileContents);
+export const isPostPath = (path: string): boolean => {
+  return path.length > 3 && path.slice(-3) === ".md";
+};
 
-    console.assert(matterResult.data !== undefined, "Post Date not set");
+export const toFullPath = (dirName: string): string => {
+  return path.join(process.cwd(), dirName);
+};
 
-    return {
-      id: postId,
-      ...matterResult.data,
-    };
+export const collectPostPathsInDirPath = (dirPath: string): string[] => {
+  const fileNames: string[] = fs
+    .readdirSync(dirPath)
+    .filter((name) => isPostPath(name));
+  return fileNames.map((fileName) => path.join(dirPath, fileName));
+};
+
+export const getAllPostsIds = (): string[] => {
+  const postPaths: string[] = getAllPostPaths();
+  return postPaths.map((postPath) => getPostIdFromPostPath(postPath));
+};
+
+export const getPostIdFromPostPath = (postPath: string): string => {
+  console.assert(isPostPath(postPath));
+  return postPath.substring(postPath.lastIndexOf("/") + 1, postPath.length - 3);
+};
+
+const getPostIdsInDirPath = (dirPath: string): string[] => {
+  const postPaths = collectPostPathsInDirPath(dirPath);
+  return postPaths.map((postPath) => getPostIdFromPostPath(postPath));
+};
+
+export const getAllPostPaths = (): string[] => {
+  const paths: string[] = [];
+  SEARCH_DIR_PATH_LIST.forEach((dirName) => {
+    const dirPath = toFullPath(dirName);
+    paths.push(...collectPostPathsInDirPath(dirPath));
   });
+  return paths;
+};
 
-  // 日付順にソートして返す
-  return pathPostsData.sort((a: any, b: any) => {
-    if (a.date < b.date) {
-      return 1;
-    } else if (a.date > b.date) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
-}
+const getPostMetaDataFromPath = (filePath: string): any => {
+  const fileContents = fs.readFileSync(filePath, "utf8");
+  const matterResult = matter(fileContents);
 
-function getPostIdFromPaths(filePaths: string[], searchDir: string): any[] {
-  // 各投稿のデータをもつオブジェクトを取得する
-  return filePaths.map((fileName) => {
-    const fullPath = path.join(searchDir, fileName);
+  return {
+    id: getPostIdFromPostPath(filePath),
+    ...matterResult.data,
+  };
+};
 
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const matterResult = matter(fileContents);
+export const getPostMetaDataArrayInDirPath = (dirPath: string): any => {
+  const postPaths = collectPostPathsInDirPath(dirPath);
+  return postPaths.map((postPath) => getPostMetaDataFromPath(postPath));
+};
 
-    console.assert(matterResult.data !== undefined, "Post Date not set");
-
-    return { params: { id: matterResult.data.id } };
-  });
-}
-
-export const getPostDataFromTag = (
-  filePaths: string[],
-  searchDir: string,
-  tag: string
-): any[] => {
-  const pathPostsData = filePaths
-    .map((fileName) => {
-      const postId = fileName.replace(/\.md$/, "");
-      const fullPath = path.join(searchDir, fileName);
-
-      const fileContents = fs.readFileSync(fullPath, "utf8");
-      const matterResult = matter(fileContents);
-
-      return {
-        id: postId,
-        ...matterResult.data,
-      };
-    })
-    .filter((postData: any) => {
-      return postData.tags && postData.tags.includes(tag);
-    });
-
-  // 日付順にソートして返す
-  return pathPostsData.sort((a: any, b: any) => {
-    if (a.date < b.date) {
-      return 1;
-    } else if (a.date > b.date) {
-      return -1;
-    } else {
-      return 0;
-    }
+export const getPostIdAsParamsFromPostPaths = (postPaths: string[]): any[] => {
+  return postPaths.map((postPath: string) => {
+    return { params: { id: getPostIdFromPostPath(postPath) } };
   });
 };
 
-function getTagsFromPaths(filePaths: string[], searchDir: string): string[] {
-  const tagList: any[] = [];
-  filePaths.map((fileName) => {
-    const fullPath = path.join(searchDir, fileName);
+export function getAllPostsMetaData() {
+  const postMetaData: any[] = [];
 
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const matterResult = matter(fileContents);
-    if (matterResult.data.tags !== null) {
-      matterResult.data.tags.forEach((tagName: any) => {
-        tagList.push({ params: { tag: tagName } });
-      });
-    }
+  SEARCH_DIR_PATH_LIST.forEach((dirPath) => {
+    const dirFullPath = toFullPath(dirPath);
+    postMetaData.push(...getPostMetaDataArrayInDirPath(dirFullPath));
   });
-
-  return Array.from(new Set(tagList));
+  return postMetaData;
 }
 
-export function getCategoryPostsData(category: string) {
-  const searchDir = path.join(process.cwd(), `posts/${category}`);
-
-  // カテゴリーに対応する投稿の一覧を取得する
-  const tmpFileNames: string[] = fs.readdirSync(searchDir);
-  const filePaths: string[] = [];
-  tmpFileNames.forEach((fileName) => {
-    if (fileName.length > 3 && fileName.slice(-3) === ".md") {
-      filePaths.push(fileName);
-    }
-  });
-
-  return getPostDataFromPaths(filePaths, searchDir);
-}
-
-export const getTagPostData = (tag: string) => {
-  const searchDir = postsDir;
-  const tmpFileNames: string[] = fs.readdirSync(searchDir);
-  const filePaths: string[] = [];
-  tmpFileNames.forEach((fileName) => {
-    if (fileName.length > 3 && fileName.slice(-3) === ".md") {
-      filePaths.push(fileName);
-    }
-  });
-
-  CATEGORY_NAME_LIST.forEach((categoryName) => {
-    const categoryDir = path.join(process.cwd(), `posts/${categoryName}`);
-    const tmpFileNames: string[] = fs.readdirSync(categoryDir);
-    tmpFileNames.forEach((fileName) => {
-      if (fileName.length > 3 && fileName.slice(-3) === ".md") {
-        const filePath: string = categoryName.concat("/", fileName);
-        filePaths.push(filePath);
-      }
-    });
-  });
-  return getPostDataFromTag(filePaths, searchDir, tag);
+const searchPostInDirPath = (id: string, dirPath: string): boolean => {
+  const fullDirPath = toFullPath(dirPath);
+  const postNames = fs.readdirSync(fullDirPath);
+  return postNames.includes(`${id}.md`);
 };
-
-export const getAllTags = (): string[] => {
-  const searchDir = postsDir;
-  const tmpFileNames: string[] = fs.readdirSync(searchDir);
-  const filePaths: string[] = [];
-  tmpFileNames.forEach((fileName) => {
-    if (fileName.length > 3 && fileName.slice(-3) === ".md") {
-      filePaths.push(fileName);
-    }
-  });
-
-  CATEGORY_NAME_LIST.forEach((categoryName) => {
-    const categoryDir = path.join(process.cwd(), `posts/${categoryName}`);
-    const tmpFileNames: string[] = fs.readdirSync(categoryDir);
-    tmpFileNames.forEach((fileName) => {
-      if (fileName.length > 3 && fileName.slice(-3) === ".md") {
-        const filePath: string = categoryName.concat("/", fileName);
-        filePaths.push(filePath);
-      }
-    });
-  });
-
-  return getTagsFromPaths(filePaths, searchDir);
-};
-
-export const getAllPostsId = (): any[] => {
-  const searchDir = postsDir;
-  const tmpFileNames: string[] = fs.readdirSync(searchDir);
-  const filePaths: string[] = [];
-  tmpFileNames.forEach((fileName) => {
-    if (fileName.length > 3 && fileName.slice(-3) === ".md") {
-      filePaths.push(fileName);
-    }
-  });
-
-  CATEGORY_NAME_LIST.forEach((categoryName) => {
-    const categoryDir = path.join(process.cwd(), `posts/${categoryName}`);
-    const tmpFileNames: string[] = fs.readdirSync(categoryDir);
-
-    tmpFileNames.forEach((fileName) => {
-      if (fileName.length > 3 && fileName.slice(-3) === ".md") {
-        const filePath: string = categoryName.concat("/", fileName);
-        filePaths.push(filePath);
-      }
-    });
-  });
-
-  return getPostIdFromPaths(filePaths, searchDir);
-};
-
-export function getAllPostsData() {
-  const searchDir = postsDir;
-  const tmpFileNames: string[] = fs.readdirSync(searchDir);
-  const filePaths: string[] = [];
-  tmpFileNames.forEach((fileName) => {
-    if (fileName.length > 3 && fileName.slice(-3) === ".md") {
-      filePaths.push(fileName);
-    }
-  });
-
-  CATEGORY_NAME_LIST.forEach((categoryName) => {
-    const categoryDir = path.join(process.cwd(), `posts/${categoryName}`);
-    const tmpFileNames: string[] = fs.readdirSync(categoryDir);
-    tmpFileNames.forEach((fileName) => {
-      if (fileName.length > 3 && fileName.slice(-3) === ".md") {
-        const filePath: string = categoryName.concat("/", fileName);
-        filePaths.push(filePath);
-      }
-    });
-  });
-  return getPostDataFromPaths(filePaths, searchDir);
-}
 
 export async function getPostContent(id: string) {
-  const fullPath = path.join(postsDir, `${id}.md`);
-  const postContents = fs.readFileSync(fullPath, "utf8");
+  const dirPathWithTargetPost = SEARCH_DIR_PATH_LIST.filter((dirPath) => {
+    return searchPostInDirPath(id, dirPath);
+  })[0];
 
+  const targetPostPath = path.join(dirPathWithTargetPost, `${id}.md`);
+  const postContents = fs.readFileSync(targetPostPath, "utf8");
   const matterResult = matter(postContents);
-
   const contentHtml = markdownToHtml(matterResult.content);
   return {
     id,
@@ -226,3 +102,20 @@ export async function getPostContent(id: string) {
     ...matterResult.data,
   };
 }
+
+export const changeIdstoParams = (ids: any[]): any[] => {
+  let res: any[] = [];
+  ids.forEach((id) => {
+    res.push({ params: { id: id } });
+  });
+  return res;
+};
+
+export const changeTagstoParams = (tags: any[]): any[] => {
+  let res: any[] = [];
+  tags.forEach((tag) => {
+    res.push({ params: { tag: tag } });
+  });
+  console.log(res);
+  return res;
+};

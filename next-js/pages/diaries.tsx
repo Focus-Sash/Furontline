@@ -1,14 +1,16 @@
 import Head from "next/head";
-import { getCategoryPostsData } from "../lib/posts";
+import { getPostMetaDataArrayInDirPath, toFullPath } from "../lib/posts";
 import HubPage from "../components/hub-template";
 import { Text } from "@chakra-ui/react";
 import DiaryCard from "../components/diary-card";
 import PostCard from "../components/post-card";
 
-const categoryName: string = "diaries";
+const categoryName: string = "posts/diaries";
 
 export async function getStaticProps() {
-  const categoryPostsData = getCategoryPostsData(categoryName);
+  const categoryPostsData = getPostMetaDataArrayInDirPath(
+    toFullPath(categoryName)
+  );
   return {
     props: {
       allPostsData: categoryPostsData,
