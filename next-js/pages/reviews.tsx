@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { getPostMetaDataArrayInDirPath, toFullPath } from "../lib/posts";
-import PostCard from "../components/post-card";
+import { PageContent } from "../lib/hubpage-content";
+
 import HubPage from "../components/hub-template";
 
 const categoryName = "posts/reviews";
@@ -28,17 +29,6 @@ const Reviews = ({ allPostsData }: any) => {
         summary="作品の感想"
         pageContent={PageContent(allPostsData)}
       />
-    </>
-  );
-};
-
-const PageContent = (allPostsData: any): JSX.Element => {
-  return (
-    <>
-      {allPostsData.map((postData: any) => {
-        console.log("map", postData);
-        return <PostCard postData={postData} key={postData.id} />;
-      })}
     </>
   );
 };

@@ -2,8 +2,9 @@ import { getAllTags, getPostMetaDataArrayWithTag } from "../../lib/tags";
 import Head from "next/head";
 import HubPage from "../../components/hub-template";
 import "zenn-content-css";
-import PostCard from "../../components/post-card";
+import { PostCard } from "../../components/post-card";
 import { changeTagstoParams } from "../../lib/posts";
+import { PageContent } from "../../lib/hubpage-content";
 
 const TagPage = ({ data }: any) => {
   return (
@@ -17,16 +18,6 @@ const TagPage = ({ data }: any) => {
         summary={`タグ「${data.tag}」の記事一覧です`}
         pageContent={PageContent(data.postData)}
       />
-    </>
-  );
-};
-
-const PageContent = (allPostsData: any): JSX.Element => {
-  return (
-    <>
-      {allPostsData.map((postData: any) => {
-        return <PostCard postData={postData} key={postData.id} />;
-      })}
     </>
   );
 };

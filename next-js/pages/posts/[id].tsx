@@ -15,7 +15,12 @@ import {
 import { AiOutlineTag } from "react-icons/ai";
 import Head from "next/head";
 import NextLink from "next/link";
-import { TopBar, TopBuffer } from "../../components/topbar/topbar";
+import {
+  TopBar,
+  TopBarMobile,
+  TopBuffer,
+  TopBufferMobile,
+} from "../../components/topbar/topbar";
 import Footer from "../../components/footer";
 import {
   FONT_FAMILY,
@@ -26,11 +31,43 @@ import "zenn-content-css";
 
 const PostHeader = ({ postData }: any): JSX.Element => {
   return (
-    <Box display="inilne-block" mt={10} ml={2} color={HEADER_CONTENT_COLOR}>
+    <Box
+      display={{ base: "none", md: "inline-block" }}
+      mt={10}
+      ml={2}
+      color={HEADER_CONTENT_COLOR}
+    >
       <Text ml={1} mt={0}>
-        {postData.date}
+        {`最終更新日：${postData.date}`}
       </Text>
       <Heading as="h1" zIndex="100" fontWeight="600" fontFamily={FONT_FAMILY}>
+        {postData.title}
+      </Heading>
+      {postData.tags === null
+        ? undefined
+        : postData.tags.map((tagName: any) => {
+            return <Tag tagName={tagName} key={tagName} />;
+          })}
+    </Box>
+  );
+};
+
+const PostHeaderMobile = ({ postData }: any): JSX.Element => {
+  return (
+    <Box
+      display={{ base: "inline-block", md: "none" }}
+      color={HEADER_CONTENT_COLOR}
+      backgroundColor={MAIN_COLOR_RGB}
+      w={"100vw"}
+      p={"1rem"}
+    >
+      <Heading
+        as="h1"
+        zIndex="100"
+        fontWeight="600"
+        fontFamily={FONT_FAMILY}
+        fontSize={"26px"}
+      >
         {postData.title}
       </Heading>
       {postData.tags === null
@@ -50,6 +87,7 @@ const HeaderBackground = (): JSX.Element => {
       h="20rem"
       w="100%"
       zIndex="0"
+      display={{ base: "none", md: "flex" }}
     />
   );
 };
@@ -97,6 +135,7 @@ export default function Post({ postData }: any) {
           <title> {postData.title} - ふろんてぃあ*</title>
         </Head>
         <TopBar />
+        <TopBarMobile />
         <Flex direction="column" alignItems="center">
           <TopBuffer />
           <HeaderBackground />
@@ -108,28 +147,9 @@ export default function Post({ postData }: any) {
             zIndex="100"
           >
             <PostHeader postData={postData} />
-            <Container
-              color={"#333333"}
-              maxW="900px"
-              minW="600px"
-              minH="100vh"
-              p="30px"
-              lineHeight={1.9}
-              fontFamily={FONT_FAMILY}
-              fontSize="16px"
-              backgroundColor={"#FFFFFF"}
-              mt={10}
-              mb="20px"
-              ml="0"
-              boxShadow="0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%)"
-              mr="0"
-            >
-              <article className="znc">
-                <div
-                  dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-                />
-              </article>
-            </Container>
+            <PostHeaderMobile postData={postData} />
+            <PostArea postData={postData} />
+            <PostAreaMobile postData={postData} />
           </Flex>
         </Flex>
         <Footer />
@@ -137,6 +157,50 @@ export default function Post({ postData }: any) {
     </>
   );
 }
+
+const PostArea = ({ postData }: any): JSX.Element => {
+  return (
+    <Container
+      color={"#333333"}
+      maxW="900px"
+      minW="600px"
+      minH="100vh"
+      p="30px"
+      lineHeight={1.9}
+      fontFamily={FONT_FAMILY}
+      fontSize="16px"
+      backgroundColor={"#FFFFFF"}
+      mt={10}
+      mb="20px"
+      ml="0"
+      boxShadow="0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%)"
+      mr="0"
+      display={{ base: "none", md: "flex" }}
+    >
+      <article className="znc">
+        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      </article>
+    </Container>
+  );
+};
+
+const PostAreaMobile = ({ postData }: any): JSX.Element => {
+  return (
+    <Container
+      color={"#333333"}
+      w="100vw"
+      minH="100vh"
+      fontFamily={FONT_FAMILY}
+      fontSize="14px"
+      backgroundColor={"#FFFFFF"}
+      display={{ base: "flex", md: "none" }}
+    >
+      <article className="znc">
+        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      </article>
+    </Container>
+  );
+};
 
 export async function getStaticPaths() {
   const ids = getAllPostsIds();

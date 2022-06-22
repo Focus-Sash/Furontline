@@ -1,13 +1,13 @@
-import NextLink from "next/link"
+import NextLink from "next/link";
 import { Link, Text } from "@chakra-ui/react";
 
-const LogoToHome = (): JSX.Element => {
+export const LogoToHome = (): JSX.Element => {
   return (
     <NextLink href={"/"} passHref key={"top"}>
       <Link
         ml={"20px"}
         mr={"14px"}
-        mt="8px"
+        mt={"8px"}
         fontSize={"22px"}
         fontFamily={`"Trebuchet MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
         fontWeight={"600"}
@@ -22,4 +22,18 @@ const LogoToHome = (): JSX.Element => {
   );
 };
 
-export default LogoToHome;
+export const LogoToHomeMobile = (): JSX.Element => {
+  return (
+    <NextLink href={"/"} passHref key={"top"}>
+      <Link
+        fontSize={"22px"}
+        fontFamily={`"Trebuchet MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
+        fontWeight={"600"}
+        m={".3rem"}
+        ml={".7rem"}
+      >
+        <Text margin={0}>FURONtier*</Text>
+      </Link>
+    </NextLink>
+  );
+};

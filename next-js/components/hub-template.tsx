@@ -5,7 +5,7 @@ import {
   MAIN_COLOR_RGB,
   POST_BG_COLOR,
 } from "../lib/constants";
-import { TopBar, TopBuffer } from "./topbar/topbar";
+import { TopBar, TopBarMobile, TopBuffer } from "./topbar/topbar";
 import Footer from "./footer";
 import Head from "next/head";
 
@@ -24,6 +24,7 @@ interface HubPageData {
 const HubHeader = ({ head, summary }: HubPageTitleProps): JSX.Element => {
   return (
     <Flex
+      display={{ base: "none", md: "flex" }}
       h="17rem"
       w="100%"
       bgColor={MAIN_COLOR_RGB}
@@ -42,14 +43,35 @@ const HubHeader = ({ head, summary }: HubPageTitleProps): JSX.Element => {
   );
 };
 
+const HubHeaderMobile = ({ head, summary }: HubPageTitleProps): JSX.Element => {
+  return (
+    <Flex
+      display={{ base: "flex", md: "none" }}
+      h="5xrem"
+      w="100%"
+      bgColor={MAIN_COLOR_RGB}
+      color={HEADER_CONTENT_COLOR}
+      fontFamily={FONT_FAMILY}
+      flexDirection="column"
+      alignItems="center"
+    >
+      <Text display="inline-block" w="auto" fontSize="26px" fontWeight={600}>
+        {head}
+      </Text>
+    </Flex>
+  );
+};
+
 function HubPage({ allPostsData, head, summary, pageContent }: HubPageData) {
   return (
     <>
       <Box backgroundColor={POST_BG_COLOR}>
         <TopBar />
+        <TopBarMobile />
         <Flex direction="column" alignItems="center" minH={"100vh"}>
           <TopBuffer />
           <HubHeader head={head} summary={summary} />
+          <HubHeaderMobile head={head} summary={summary} />
           <Container maxW="960px" zIndex={100}>
             <HubPageBody
               allPostsData={allPostsData}
@@ -72,12 +94,7 @@ interface mainData {
   pageContent: JSX.Element;
 }
 
-const HubPageBody = ({
-  allPostsData,
-  head,
-  summary,
-  pageContent,
-}: mainData) => {
+const HubPageBody = ({ pageContent }: mainData) => {
   return (
     <Flex mt="1em" align="left" display={"block"}>
       {pageContent}

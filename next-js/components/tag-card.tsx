@@ -12,7 +12,7 @@ const TagCard = ({ tagName }: any) => {
         boxShadow="0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 12%)"
         backgroundColor={"#F8F8F8"}
         borderRadius={".3rem"}
-        m={"1rem"}
+        m={{ base: ".5rem", md: "1rem" }}
         p={".5rem"}
       >
         <Icon
@@ -24,7 +24,7 @@ const TagCard = ({ tagName }: any) => {
         <NextLink href={`/tags/${tagName}`}>
           <Link>
             <Text
-              fontSize={"20px"}
+              fontSize={{ base: "16px", md: "20px" }}
               fontFamily={FONT_FAMILY}
               textColor={"#333333"}
               display={"inline-block"}

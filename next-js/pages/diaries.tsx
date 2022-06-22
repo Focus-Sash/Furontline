@@ -1,9 +1,7 @@
 import Head from "next/head";
 import { getPostMetaDataArrayInDirPath, toFullPath } from "../lib/posts";
 import HubPage from "../components/hub-template";
-import { Text } from "@chakra-ui/react";
-import DiaryCard from "../components/diary-card";
-import PostCard from "../components/post-card";
+import { PageContent } from "../lib/hubpage-content";
 
 const categoryName: string = "posts/diaries";
 
@@ -30,16 +28,6 @@ const Diary = ({ allPostsData }: any) => {
         summary="内容の薄い日記"
         pageContent={PageContent(allPostsData)}
       />
-    </>
-  );
-};
-
-const PageContent = (allPostsData: any): JSX.Element => {
-  return (
-    <>
-      {allPostsData.map((postData: any) => (
-        <PostCard postData={postData} key={postData.id} />
-      ))}
     </>
   );
 };
