@@ -1,7 +1,11 @@
 import { Box, Text, Icon, Link, Flex, textDecoration } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { TOPBAR_BG_COLOR, TOPBAR_HEIGHT } from "../../lib/constants";
+import {
+  FONT_FAMILY,
+  TOPBAR_BG_COLOR,
+  TOPBAR_HEIGHT,
+} from "../../lib/constants";
 
 interface NavItemProps {
   id: string;
@@ -24,7 +28,7 @@ const PostMenu = (): JSX.Element => {
         fontSize={"14px"}
         pl="14px"
         pr="14px"
-        fontFamily={`"Yu Gothic", "Helvetica Neue", "Helvetica", "Arial", sans-serif`}
+        fontFamily={FONT_FAMILY}
         fontWeight={"500"}
         _hover={{ backgroundColor: "#333333", textDecoration: "none" }}
         _groupHover={{ backgroundColor: "#333333" }}
