@@ -31,6 +31,7 @@ export const LogoToHomeMobile = (): JSX.Element => {
         fontWeight={"600"}
         m={".3rem"}
         ml={".7rem"}
+        _focus={{ boxShadow: "none" }}
       >
         <Text margin={0}>FURONtier*</Text>
       </Link>

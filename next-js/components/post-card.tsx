@@ -33,7 +33,7 @@ export const PostCard = ({ postData }: any) => {
         >
           {postData.date}
         </Text>
-        <NextLink href={`posts/${postData.id}`}>
+        <NextLink href={`/posts/${postData.id}`}>
           <Link>
             <Text
               fontSize={"20px"}

@@ -60,7 +60,7 @@ const NavItem = ({ id, link }: NavItemProps): JSX.Element => {
         fontSize={"14px"}
         fontFamily={FONT_FAMILY}
         _hover={{ backgroundColor: "#333333", textDecoration: "none" }}
-        _focus={{ boxShadow: "none" }}
+        _focus={{ boxShadow: "none", backgroundColor: { TOPBAR_BG_COLOR } }}
       >
         <Text margin={0}>{id}</Text>
       </Link>
@@ -115,7 +115,16 @@ export const TopBarMobile = (): JSX.Element => {
         <LogoToHomeMobile key={"home"} />
         <IconButton
           mr={".1rem"}
-          _focus={{ boxShadow: "none" }}
+          _focus={{
+            boxShadow: "none",
+            color: "inherit",
+            backgroundColor: "#555555",
+            dataHover: "#555555",
+            WebkitTapHighlightColor: "transparent",
+          }}
+          _hover={{
+            backgroundColor: "#555555",
+          }}
           onClick={changeMenuDisplay}
           icon={
             menuDisplay ? (
@@ -188,11 +197,9 @@ const SearchField = (): JSX.Element => {
 
 const NavItemMobile = ({ id, link }: NavItemProps): JSX.Element => {
   return (
-    <NextLink href={link} passHref>
-      <Link fontSize={"16px"} fontFamily={FONT_FAMILY}>
-        <Text pl={".2rem"}>{id}</Text>
-      </Link>
-    </NextLink>
+    <div className="mobile-navbar-link">
+      <NextLink href={link}>{id}</NextLink>
+    </div>
   );
 };
 const MobileNav = () => {
@@ -200,10 +207,10 @@ const MobileNav = () => {
     <Stack
       bgColor={"rgba(255, 255, 255, 0.95)"}
       p={4}
-      pt={0}
       display={{ md: "none" }}
       w={"100vw"}
       h={"100vh"}
+      pt={".4rem"}
     >
       {mobileNavItems.map((navItem) => {
         return (

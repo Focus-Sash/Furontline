@@ -51,3 +51,13 @@ code {
 #toc:hover {
   text-decoration: none;
 }
+
+.mobile-navbar-link {
+  padding-top: 0.3rem;
+  font-size: 16px;
+  font-family: "Helvetica Neue", "Helvetica", "Yu Gothic Medium", "Meiryo",
+    "Arial", sans-serif;
+}
+.mobile-navbar-link > a {
+  color: #333333;
+}
