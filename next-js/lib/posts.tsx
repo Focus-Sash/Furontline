@@ -3,8 +3,6 @@ import path from "path";
 import matter from "gray-matter";
 import { SEARCH_DIR_PATH_LIST } from "./constants";
 import markdownToHtml from "zenn-markdown-html";
-import { assert } from "console";
-import { forEach } from "lodash";
 
 // postsDir = next-js/posts
 export const postsTopDir = path.join(process.cwd(), "posts");
@@ -12,7 +10,7 @@ export const postsTopDir = path.join(process.cwd(), "posts");
 // 基本的にすべてパスで処理して、idが必要なときだけ加工する
 
 export const isPostPath = (path: string): boolean => {
-  return path.length > 3 && path.slice(-3) === ".md";
+  return path.length > 3 && path.slice(-3) === ".md" && path[0] != ".";
 };
 
 export const toFullPath = (dirName: string): string => {
@@ -34,11 +32,6 @@ export const getAllPostsIds = (): string[] => {
 export const getPostIdFromPostPath = (postPath: string): string => {
   console.assert(isPostPath(postPath));
   return postPath.substring(postPath.lastIndexOf("/") + 1, postPath.length - 3);
-};
-
-const getPostIdsInDirPath = (dirPath: string): string[] => {
-  const postPaths = collectPostPathsInDirPath(dirPath);
-  return postPaths.map((postPath) => getPostIdFromPostPath(postPath));
 };
 
 export const getAllPostPaths = (): string[] => {
