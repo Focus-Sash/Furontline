@@ -197,9 +197,9 @@ const SearchField = (): JSX.Element => {
 
 const NavItemMobile = ({ id, link }: NavItemProps): JSX.Element => {
   return (
-    <div className="mobile-navbar-link">
-      <NextLink href={link}>{id}</NextLink>
-    </div>
+    <NextLink href={link}>
+      <div className="mobile-navbar-link">{id}</div>
+    </NextLink>
   );
 };
 const MobileNav = () => {

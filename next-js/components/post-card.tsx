@@ -95,6 +95,7 @@ export const PostCardMobile = ({ postData }: any) => {
               m={0}
               mt={"-.5rem"}
               ml={".1rem"}
+              mr={"1.5rem"}
             >
               {postData.title}
             </Text>

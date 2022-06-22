@@ -60,4 +60,6 @@ code {
 }
 .mobile-navbar-link > a {
   color: #333333;
+  padding-top: 1rem;
+  padding-bottom: 0.8rem;
 }
