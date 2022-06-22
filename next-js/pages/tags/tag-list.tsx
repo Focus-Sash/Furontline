@@ -1,9 +1,6 @@
 import Head from "next/head";
 import { getAllPostsMetaData } from "../../lib/posts";
 import HubPage from "../../components/hub-template";
-import PostCard from "../../components/post-card";
-import { getAllTags } from "../../lib/tags";
-import { forEach } from "lodash";
 import TagCard from "../../components/tag-card";
 
 export async function getStaticProps() {
