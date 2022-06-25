@@ -140,10 +140,10 @@ export default function Post({ postData }: any) {
             name="twitter:title"
             content={`${postData.title} - ふろんてぃあ`}
           />
-          <meta name="twitter:discription" content={postData.summary} />
+          <meta name="twitter:description" content={postData.summary} />
           <meta
             name="twitter:image"
-            content="https://focus-sash-blog.vercel.app/public/card.png"
+            content="https://focus-sash-blog.vercel.app/card.png"
           />
         </Head>
         <TopBar />
