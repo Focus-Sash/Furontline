@@ -133,6 +133,18 @@ export default function Post({ postData }: any) {
       <Box backgroundColor="#EAE9D9">
         <Head>
           <title> {postData.title} - ふろんてぃあ*</title>
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:site" content="@Focus_Sash" />
+          <meta name="twitter:domain" content="focus-sash-blog.vercel.app" />
+          <meta
+            name="twitter:title"
+            content={`${postData.title} - ふろんてぃあ`}
+          />
+          <meta name="twitter:discription" content={postData.summary} />
+          <meta
+            name="twitter:image"
+            content="https://focus-sash-blog.vercel.app/public/card.png"
+          />
         </Head>
         <TopBar />
         <TopBarMobile />
