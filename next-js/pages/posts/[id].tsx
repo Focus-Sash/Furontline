@@ -19,7 +19,6 @@ import {
   TopBar,
   TopBarMobile,
   TopBuffer,
-  TopBufferMobile,
 } from "../../components/topbar/topbar";
 import Footer from "../../components/footer";
 import {
@@ -137,16 +136,27 @@ export default function Post({ postData }: any) {
           <meta name="description" content={`${postData.summary}`} />
           <meta
             name="keywords"
-            content={`${postData.keywords.map((word: string) => {
-              `${word}, `;
-            })}`}
+            content={`${
+              postData.keywords === undefined || postData.keywords == null
+                ? ""
+                : postData.keywords.map((word: string) => {
+                    `${word}, `;
+                  })
+            }`}
           />
           <meta property="og:type" content="article" />
           <meta
             property="og:title"
             content={`${postData.title} - ふろんてぃあ*`}
           />
-          <meta property="og:description" content={`${postData.summary}`} />
+          <meta
+            property="og:description"
+            content={`${
+              postData.summary === undefined || postData.summary === null
+                ? ""
+                : postData.summary
+            }`}
+          />
           <meta
             property="og:image"
             content="https://focus-sash-blog.vercel.app/card.png"
