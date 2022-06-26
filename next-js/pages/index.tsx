@@ -25,6 +25,10 @@ const Home = ({ allPostsData }: any) => {
     <>
       <Head>
         <title>{`トップ - ふろんてぃあ*`}</title>
+        <meta
+          name="google-site-verification"
+          content="nYQMvNuRZtxBYvRx4v_ORKLC8jhHAthr9115NM0C_-k"
+        />
         <meta name="title" content={`トップ - ふろんてぃあ*`} />
         <meta name="description" content={`ふろんの個人ブログ`} />
         <meta property="og:type" content="article" />
