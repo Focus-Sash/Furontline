@@ -22,10 +22,15 @@ h1 {
 
 h2 {
   border-bottom: 1px solid var(--divider-color);
+  margin-top: 5rem;
+}
+
+h3 {
+  margin-top: 3rem;
 }
 
 a {
-  color: #0092cc;
+  color: #1398bd;
   text-decoration: none;
 }
 

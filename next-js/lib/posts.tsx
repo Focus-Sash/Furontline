@@ -2,7 +2,13 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { SEARCH_DIR_PATH_LIST } from "./constants";
-import markdownToHtml from "zenn-markdown-html";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeKatex from "rehype-katex";
+import rehypeHighlight from "rehype-highlight";
+import rehypeStringify from "rehype-stringify/lib";
+import remarkMath from "remark-math";
 
 // postsDir = next-js/posts
 export const postsTopDir = path.join(process.cwd(), "posts");
@@ -88,7 +94,36 @@ export async function getPostContent(id: string) {
   const targetPostPath = path.join(dirPathWithTargetPost, `${id}.md`);
   const postContents = fs.readFileSync(targetPostPath, "utf8");
   const matterResult = matter(postContents);
-  const contentHtml = markdownToHtml(matterResult.content);
+  const processedContent = await unified()
+    .use(remarkParse)
+    .use(remarkMath)
+    .use(remarkRehype)
+    .use(rehypeKatex)
+    .use(rehypeHighlight)
+    .use(rehypeStringify)
+    .process(matterResult.content);
+
+  const contentHtml = processedContent.toString();
+
+  const parseResult = unified().use(remarkParse).parse(matterResult.content);
+  // console.log("Parse Result", parseResult);
+  // console.log(
+  //   "Parse Result Children",
+  //   parseResult.children.map((node: any) => node.children)
+  // );
+
+  const parseMathResult = unified()
+    .use(remarkParse)
+    .use(remarkMath)
+    .parse(matterResult.content);
+
+  // console.log("Parse Math Result", parseMathResult);
+  // console.log(
+  //   "Parse Math Result Children",
+  //   parseMathResult.children.map((node: any) => node.children)
+  // );
+
+  // console.log("Final Content: ", contentHtml);
   return {
     id,
     contentHtml,

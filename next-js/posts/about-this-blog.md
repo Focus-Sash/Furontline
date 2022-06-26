@@ -35,13 +35,3 @@ category: 'makings'
 ## 連絡先
 
 記事の感想・バグ報告・要望などは管理人のTwitter (@Focus_Sash) までお願いします。コメント機能を実装する予定はいまのところありません。
-
-:::message
-aaa
-:::
-
-```c++
-int main() {
-  int x = 1;
-}
-```

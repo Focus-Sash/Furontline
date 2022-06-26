@@ -26,7 +26,7 @@ import {
   HEADER_CONTENT_COLOR,
   MAIN_COLOR_RGB,
 } from "../../lib/constants";
-import "zenn-content-css";
+// import "zenn-content-css";
 
 const PostHeader = ({ postData }: any): JSX.Element => {
   return (
@@ -178,6 +178,12 @@ export default function Post({ postData }: any) {
             name="twitter:image"
             content="https://focus-sash-blog.vercel.app/card.png"
           />
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
+            integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB"
+            crossOrigin="anonymous"
+          />
         </Head>
         <TopBar />
         <TopBarMobile />
@@ -223,7 +229,7 @@ const PostArea = ({ postData }: any): JSX.Element => {
       mr="0"
       display={{ base: "none", md: "flex" }}
     >
-      <article className="znc">
+      <article className="mb-32 znc">
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
     </Container>
