@@ -25,6 +25,29 @@ const Home = ({ allPostsData }: any) => {
     <>
       <Head>
         <title>{`トップ - ふろんてぃあ*`}</title>
+        <meta name="title" content={`トップ - ふろんてぃあ*`} />
+        <meta name="description" content={`ふろんの個人ブログ`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={`トップ - ふろんてぃあ*`} />
+        <meta property="og:description" content={`ふろんの個人ブログ`} />
+        <meta
+          property="og:image"
+          content="https://focus-sash-blog.vercel.app/card.png"
+        />
+        <meta
+          property="og:url"
+          content={`https://focus-sash-blog.vercel.app`}
+        />
+        <meta property="og:site_name" content="ふろんてぃあ*" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@Focus_Sash" />
+        <meta name="twitter:domain" content="focus-sash-blog.vercel.app" />
+        <meta name="twitter:title" content={`ふろんてぃあ*`} />
+        <meta name="twitter:description" content={`ふろんの個人ブログです`} />
+        <meta
+          name="twitter:image"
+          content="https://focus-sash-blog.vercel.app/card.png"
+        />
       </Head>
       <HubPage
         allPostsData={allPostsData}

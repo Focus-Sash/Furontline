@@ -133,12 +133,35 @@ export default function Post({ postData }: any) {
       <Box backgroundColor="#EAE9D9">
         <Head>
           <title> {postData.title} - ふろんてぃあ*</title>
+          <meta name="title" content={`${postData.title} - ふろんてぃあ*`} />
+          <meta name="description" content={`${postData.summary}`} />
+          <meta
+            name="keywords"
+            content={`${postData.keywords.map((word: string) => {
+              `${word}, `;
+            })}`}
+          />
+          <meta property="og:type" content="article" />
+          <meta
+            property="og:title"
+            content={`${postData.title} - ふろんてぃあ*`}
+          />
+          <meta property="og:description" content={`${postData.summary}`} />
+          <meta
+            property="og:image"
+            content="https://focus-sash-blog.vercel.app/card.png"
+          />
+          <meta
+            property="og:url"
+            content={`https://focus-sash-blog.vercel.app/posts/${postData.id}`}
+          />
+          <meta property="og:site_name" content="ふろんてぃあ*" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:site" content="@Focus_Sash" />
           <meta name="twitter:domain" content="focus-sash-blog.vercel.app" />
           <meta
             name="twitter:title"
-            content={`${postData.title} - ふろんてぃあ`}
+            content={`${postData.title} - ふろんてぃあ*`}
           />
           <meta name="twitter:description" content={postData.summary} />
           <meta
