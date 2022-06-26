@@ -204,6 +204,7 @@ export default function Post({ postData }: any) {
 }
 
 const PostArea = ({ postData }: any): JSX.Element => {
+  console.log(postData.contentHtml);
   return (
     <Container
       color={"#333333"}
@@ -240,8 +241,11 @@ const PostAreaMobile = ({ postData }: any): JSX.Element => {
       backgroundColor={"#FFFFFF"}
       display={{ base: "flex", md: "none" }}
     >
-      <article className="znc">
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      <article>
+        <div
+          className="znc"
+          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+        />
       </article>
     </Container>
   );
