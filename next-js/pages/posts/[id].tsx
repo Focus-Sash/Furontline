@@ -226,7 +226,7 @@ const PostArea = ({ postData }: any): JSX.Element => {
       maxW="900px"
       minW="600px"
       minH="100vh"
-      p="1rem"
+      p="2rem"
       lineHeight={1.9}
       fontFamily={FONT_FAMILY}
       fontSize="16px"
