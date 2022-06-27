@@ -105,25 +105,6 @@ export async function getPostContent(id: string) {
 
   const contentHtml = processedContent.toString();
 
-  const parseResult = unified().use(remarkParse).parse(matterResult.content);
-  // console.log("Parse Result", parseResult);
-  // console.log(
-  //   "Parse Result Children",
-  //   parseResult.children.map((node: any) => node.children)
-  // );
-
-  const parseMathResult = unified()
-    .use(remarkParse)
-    .use(remarkMath)
-    .parse(matterResult.content);
-
-  // console.log("Parse Math Result", parseMathResult);
-  // console.log(
-  //   "Parse Math Result Children",
-  //   parseMathResult.children.map((node: any) => node.children)
-  // );
-
-  // console.log("Final Content: ", contentHtml);
   return {
     id,
     contentHtml,
