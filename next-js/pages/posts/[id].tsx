@@ -225,7 +225,7 @@ const PostArea = ({ postData }: any): JSX.Element => {
       maxW="900px"
       minW="600px"
       minH="100vh"
-      p="30px"
+      p="1rem"
       lineHeight={1.9}
       fontFamily={FONT_FAMILY}
       fontSize="16px"
@@ -236,6 +236,7 @@ const PostArea = ({ postData }: any): JSX.Element => {
       boxShadow="0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%)"
       mr="0"
       display={{ base: "none", md: "flex" }}
+      boxSizing="border-box"
     >
       <article>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
