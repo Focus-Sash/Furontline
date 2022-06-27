@@ -68,3 +68,11 @@ code {
   padding-top: 1rem;
   padding-bottom: 0.8rem;
 }
+
+.post-header-text {
+  margin-left: 1rem;
+}
+
+.post-header-tag {
+  margin-left: 0.5rem;
+}

@@ -36,17 +36,26 @@ const PostHeader = ({ postData }: any): JSX.Element => {
       ml={2}
       color={HEADER_CONTENT_COLOR}
     >
-      <Text ml={1} mt={0}>
-        {`最終更新日：${postData.date}`}
-      </Text>
-      <Heading as="h1" zIndex="100" fontWeight="600" fontFamily={FONT_FAMILY}>
+      <Text
+        mt={0}
+        className="post-header-text"
+      >{`最終更新日：${postData.date}`}</Text>
+      <Heading
+        as="h1"
+        zIndex="100"
+        fontWeight="600"
+        fontFamily={FONT_FAMILY}
+        className="post-header-text"
+      >
         {postData.title}
       </Heading>
-      {postData.tags === null
-        ? undefined
-        : postData.tags.map((tagName: any) => {
-            return <Tag tagName={tagName} key={tagName} />;
-          })}
+      <Box className="post-header-tag">
+        {postData.tags === null
+          ? undefined
+          : postData.tags.map((tagName: any) => {
+              return <Tag tagName={tagName} key={tagName} />;
+            })}
+      </Box>
     </Box>
   );
 };
@@ -210,7 +219,6 @@ export default function Post({ postData }: any) {
 }
 
 const PostArea = ({ postData }: any): JSX.Element => {
-  console.log(postData.contentHtml);
   return (
     <Container
       color={"#333333"}
@@ -229,7 +237,7 @@ const PostArea = ({ postData }: any): JSX.Element => {
       mr="0"
       display={{ base: "none", md: "flex" }}
     >
-      <article className="mb-32 znc">
+      <article>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
     </Container>
@@ -241,17 +249,16 @@ const PostAreaMobile = ({ postData }: any): JSX.Element => {
     <Container
       color={"#333333"}
       w="100vw"
+      maxW="100vw"
       minH="100vh"
+      m={0}
       fontFamily={FONT_FAMILY}
       fontSize="14px"
       backgroundColor={"#FFFFFF"}
-      display={{ base: "flex", md: "none" }}
+      display={{ base: "block", md: "none" }}
     >
       <article>
-        <div
-          className="znc"
-          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-        />
+        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
     </Container>
   );
