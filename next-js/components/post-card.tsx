@@ -90,7 +90,6 @@ export const PostCardMobile = ({ postData }: any) => {
             <Text
               fontSize={"18px"}
               fontFamily={FONT_FAMILY}
-              fontWeight={"bold"}
               textColor={"#333333"}
               m={0}
               mt={"-.5rem"}
