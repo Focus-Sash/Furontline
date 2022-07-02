@@ -152,7 +152,7 @@ export default function Post({ postData }: any) {
                   })
             }`}
           />
-          {/* <meta property="og:type" content="article" />
+          <meta property="og:type" content="article" />
           <meta
             property="og:title"
             content={`${postData.title} - ふろんてぃあ*`}
@@ -167,14 +167,14 @@ export default function Post({ postData }: any) {
           />
           <meta
             property="og:image"
-            content="https://focus-sash-blog.vercel.app/card.png"
+            content="https://furon-blog.vercel.app/card.png"
           />
           <meta
             property="og:url"
-            content={`https://focus-sash-blog.vercel.app/posts/${postData.id}`}
+            content={`https://furon-blog.vercel.app/posts/${postData.id}`}
           />
-          <meta property="og:site_name" content="ふろんてぃあ*" /> */}
-          {/* <meta name="twitter:card" content="summary_large_image" /> */}
+          <meta property="og:site_name" content="ふろんてぃあ*" />
+          <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:site" content="@Focus_Sash" />
           <meta name="twitter:domain" content="focus-sash-blog.vercel.app" />
           <meta
@@ -184,7 +184,7 @@ export default function Post({ postData }: any) {
           <meta name="twitter:description" content={postData.summary} />
           <meta
             name="twitter:image"
-            content="https://focus-sash-blog.vercel.app/card.png"
+            content="https://furon-blog.vercel.app/card.png"
           />
           <link
             rel="stylesheet"
