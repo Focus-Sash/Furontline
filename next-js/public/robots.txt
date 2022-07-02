@@ -1,6 +1,0 @@
-Sitemap: https://furon-blog.vercel.app/sitemap.xml
-
-User-agent: *
-Allow: /*
-
-Disallow: /api/*
