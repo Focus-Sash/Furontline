@@ -165,10 +165,7 @@ export default function Post({ postData }: any) {
                 : postData.summary
             }`}
           />
-          <meta
-            property="og:image"
-            content="https://focus-sash-blog.vercel.app/card.png"
-          />
+
           <meta
             property="og:url"
             content={`https://focus-sash-blog.vercel.app/posts/${postData.id}`}
