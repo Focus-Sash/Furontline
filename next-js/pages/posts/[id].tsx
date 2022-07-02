@@ -176,7 +176,7 @@ export default function Post({ postData }: any) {
           <meta property="og:site_name" content="ふろんてぃあ*" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:site" content="@Focus_Sash" />
-          <meta name="twitter:domain" content="focus-sash-blog.vercel.app" />
+          <meta name="twitter:domain" content="furon-blog.vercel.app" />
           <meta
             name="twitter:title"
             content={`${postData.title} - ふろんてぃあ*`}
