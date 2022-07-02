@@ -182,10 +182,10 @@ export default function Post({ postData }: any) {
             content={`${postData.title} - ふろんてぃあ*`}
           />
           <meta name="twitter:description" content={postData.summary} />
-          <meta
+          {/* <meta
             name="twitter:image"
             content="https://furon-blog.vercel.app/card.png"
-          />
+          /> */}
           <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css"
