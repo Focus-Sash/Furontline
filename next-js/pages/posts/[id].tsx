@@ -26,7 +26,6 @@ import {
   HEADER_CONTENT_COLOR,
   MAIN_COLOR_RGB,
 } from "../../lib/constants";
-// import "zenn-content-css";
 
 const PostHeader = ({ postData }: any): JSX.Element => {
   return (
