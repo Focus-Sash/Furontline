@@ -218,7 +218,6 @@ export default function Post({ postData }: any) {
 }
 
 const PostArea = ({ postData }: any): JSX.Element => {
-  console.log(postData.contentHtml);
   return (
     <Container
       color={"#333333"}

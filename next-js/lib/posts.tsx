@@ -9,6 +9,7 @@ import rehypeKatex from "rehype-katex";
 import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify/lib";
 import remarkMath from "remark-math";
+const remarkCaptions = require("remark-captions");
 
 // postsDir = next-js/posts
 export const postsTopDir = path.join(process.cwd(), "posts");
@@ -96,6 +97,7 @@ export async function getPostContent(id: string) {
   const matterResult = matter(postContents);
   const processedContent = await unified()
     .use(remarkParse)
+    .use(remarkCaptions)
     .use(remarkMath)
     .use(remarkRehype)
     .use(rehypeKatex)

@@ -8,7 +8,7 @@ tags:
 category: 'makings'
 ---
 
-ふろん (TwitterID: Focus_Sash) の個人ブログです。
+ふろん (TwitterID: [@Focus_Sash](https://twitter.com/Focus_Sash)) の個人ブログです。
 
 ## 管理人について
 
@@ -36,14 +36,6 @@ category: 'makings'
 
 記事の感想・バグ報告・要望などは管理人のTwitter (@Focus_Sash) までお願いします。コメント機能を実装する予定はいまのところありません。
 
-```c++
-int main() {
-  int x = 1;
-}
-```
+## 使っている技術
 
-$x = 1$
-
-$$
-x  = 1
-$$
+Next.jsで制作して、Vercelにデプロイしています。
