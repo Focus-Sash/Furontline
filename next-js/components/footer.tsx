@@ -2,7 +2,6 @@ import { Flex, Text, Icon } from "@chakra-ui/react";
 import {
   FOOTER_BG_COLOR,
   FOOTER_CONTENTS_COLOR,
-  TOPBAR_HEIGHT,
   TOPBAR_HEIGHT_MOBILE,
 } from "../lib/constants";
 import { BsTwitter, BsGithub } from "react-icons/bs";
@@ -16,6 +15,7 @@ const Footer = (): JSX.Element => {
       h={TOPBAR_HEIGHT_MOBILE}
       justifyContent="space-between"
       verticalAlign={"middle"}
+      display={{ base: "none", md: "flex" }}
     >
       <Text
         display={"inline"}
