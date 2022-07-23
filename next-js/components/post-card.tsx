@@ -56,28 +56,28 @@ export const PostCardMobile = ({ postData }: any) => {
     <>
       <Box
         display={{ base: "block", md: "none" }}
-        borderWidth="1px"
-        borderColor="#BBBBBB"
-        borderRadius={".5rem"}
+        bgColor="#F8F8F8"
         pl="1.5rem"
         pb="1rem"
         mt="1.4rem"
         mb="1.4rem"
-        bgColor={"#F8F8F8"}
+        borderWidth="1px"
+        borderColor="#BBBBBB"
+        borderRadius=".5rem"
         boxShadow="0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%)"
       >
         <Icon
           as={AiOutlineCalendar}
           display="inline-block"
           mr=".2rem"
-          color={"gray.500"}
-          verticalAlign={"middle"}
+          color="gray.500"
+          verticalAlign="middle"
         />
         <Text
-          textColor={"gray.500"}
+          textColor="gray.500"
           display="inline-block"
-          verticalAlign={"middle"}
-          fontSize={"14px"}
+          verticalAlign="middle"
+          fontSize="14px"
         >
           {postData.date}
         </Text>
