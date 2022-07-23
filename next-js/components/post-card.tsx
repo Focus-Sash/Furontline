@@ -10,24 +10,24 @@ export const PostCard = ({ postData }: any) => {
         display={{ base: "none", md: "block" }}
         borderWidth="1px"
         borderColor="#BBBBBB"
-        borderRadius={".5rem"}
+        borderRadius=".5rem"
         pl="2rem"
-        pt="1rem"
-        pb="1rem"
+        pt=".5rem"
+        pb="1.5rem"
         mt="2rem"
         mb="2rem"
-        bgColor={"#F8F8F8"}
+        bgColor="#F8F8F8"
         boxShadow="0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%)"
       >
         <Icon
           as={AiOutlineCalendar}
           display="inline-block"
           mr=".2rem"
-          color={"gray.500"}
-          verticalAlign={"middle"}
+          color="gray.500"
+          verticalAlign="middle"
         />
         <Text
-          textColor={"gray.500"}
+          textColor="gray.500"
           display="inline-block"
           verticalAlign={"middle"}
         >
@@ -46,10 +46,6 @@ export const PostCard = ({ postData }: any) => {
             </Text>
           </Link>
         </NextLink>
-
-        <Text color={"gray.500"} noOfLines={1} fontFamily={FONT_FAMILY}>
-          {postData.summary}
-        </Text>
       </Box>
     </>
   );

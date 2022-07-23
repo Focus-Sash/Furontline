@@ -11,6 +11,27 @@ import rehypeStringify from "rehype-stringify/lib";
 import remarkMath from "remark-math";
 const remarkCaptions = require("remark-captions");
 
+interface PostData {
+  // all data needed to display a post
+  id: string;
+  contentHtml: string;
+  title: string;
+  summary?: string;
+  date: string;
+  tags: string[];
+  category: string;
+}
+
+interface PostMetaData {
+  // PostData without content
+  id: string;
+  title: string;
+  summary?: string;
+  date: string;
+  tags: string[];
+  category: string;
+}
+
 // postsDir = next-js/posts
 export const postsTopDir = path.join(process.cwd(), "posts");
 
@@ -50,7 +71,7 @@ export const getAllPostPaths = (): string[] => {
   return paths;
 };
 
-const getPostMetaDataFromPath = (filePath: string): any => {
+export const getPostMetaDataFromPath = (filePath: string): any => {
   const fileContents = fs.readFileSync(filePath, "utf8");
   const matterResult = matter(fileContents);
 
@@ -114,16 +135,20 @@ export async function getPostContent(id: string) {
   };
 }
 
-export const changeIdstoParams = (ids: any[]): any[] => {
-  let res: any[] = [];
+export const convertIdstoParams = (
+  ids: string[]
+): { params: { id: string } }[] => {
+  let res: { params: { id: string } }[] = [];
   ids.forEach((id) => {
     res.push({ params: { id: id } });
   });
   return res;
 };
 
-export const changeTagstoParams = (tags: any[]): any[] => {
-  let res: any[] = [];
+export const convertTagstoParams = (
+  tags: string[]
+): { params: { tag: string } }[] => {
+  let res: { params: { tag: string } }[] = [];
   tags.forEach((tag) => {
     res.push({ params: { tag: tag } });
   });

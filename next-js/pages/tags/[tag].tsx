@@ -3,7 +3,7 @@ import Head from "next/head";
 import HubPage from "../../components/hub-template";
 import "zenn-content-css";
 import { PostCard } from "../../components/post-card";
-import { changeTagstoParams } from "../../lib/posts";
+import { convertTagstoParams } from "../../lib/posts";
 import { PageContent } from "../../lib/hubpage-content";
 
 const TagPage = ({ data }: any) => {
@@ -27,7 +27,7 @@ export default TagPage;
 export async function getStaticPaths() {
   const tags = getAllTags();
   return {
-    paths: changeTagstoParams(tags),
+    paths: convertTagstoParams(tags),
     fallback: false,
   };
 }

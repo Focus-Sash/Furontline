@@ -1,7 +1,7 @@
 import {
   getAllPostsIds,
   getPostContent,
-  changeIdstoParams,
+  convertIdstoParams,
 } from "../../lib/posts";
 import {
   Container,
@@ -27,6 +27,8 @@ import {
   MAIN_COLOR_RGB,
 } from "../../lib/constants";
 
+import { OtherPostsDeskTop } from "../../components/other-posts";
+
 const PostHeader = ({ postData }: any): JSX.Element => {
   return (
     <Box
@@ -40,16 +42,16 @@ const PostHeader = ({ postData }: any): JSX.Element => {
         className="post-header-text"
       >{`最終更新日：${postData.date}`}</Text>
       <Heading
+        className="post-header-text"
         as="h1"
-        zIndex="100"
         fontWeight="600"
         fontFamily={FONT_FAMILY}
-        className="post-header-text"
+        zIndex="100"
       >
         {postData.title}
       </Heading>
       <Box className="post-header-tag">
-        {postData.tags === null
+        {postData.tags == null
           ? undefined
           : postData.tags.map((tagName: any) => {
               return <Tag tagName={tagName} key={tagName} />;
@@ -70,14 +72,14 @@ const PostHeaderMobile = ({ postData }: any): JSX.Element => {
     >
       <Heading
         as="h1"
-        zIndex="100"
         fontWeight="600"
         fontFamily={FONT_FAMILY}
-        fontSize={"26px"}
+        fontSize="26px"
+        zIndex="100"
       >
         {postData.title}
       </Heading>
-      {postData.tags === null
+      {postData.tags == null
         ? undefined
         : postData.tags.map((tagName: any) => {
             return <Tag tagName={tagName} key={tagName} />;
@@ -101,30 +103,24 @@ const HeaderBackground = (): JSX.Element => {
 
 const Tag = ({ tagName }: any): JSX.Element => {
   return (
-    <Box
-      display="inline-block"
-      color="#FFFFFF"
-      borderRadius="8px"
-      p="2px"
-      mt={2}
-    >
+    <Box display="inline-block" color="#FFFFFF" p=".1rem" mt="1rem">
       <Icon
         as={AiOutlineTag}
-        ml={1}
-        w={4}
-        h={4}
         display="inline-block"
         verticalAlign="middle"
+        h="1.1rem"
+        ml=".2rem"
+        w="1.1rem"
       />
       <NextLink href={`/tags/${tagName}`} passHref>
         <Link maxH="49px" fontSize={"14px"} fontFamily={FONT_FAMILY}>
           <Text
             display="inline-block"
+            as="u"
+            verticalAlign="middle"
             m=".2rem"
             fontWeight="500"
             fontSize="14px"
-            verticalAlign="middle"
-            as="u"
           >
             {tagName}
           </Text>
@@ -145,7 +141,7 @@ export default function Post({ postData }: any) {
           <meta
             name="keywords"
             content={`${
-              postData.keywords === undefined || postData.keywords == null
+              postData.keywords == null
                 ? ""
                 : postData.keywords.map((word: string) => {
                     `${word}, `;
@@ -159,11 +155,7 @@ export default function Post({ postData }: any) {
           />
           <meta
             property="og:description"
-            content={`${
-              postData.summary === undefined || postData.summary === null
-                ? ""
-                : postData.summary
-            }`}
+            content={`${postData.summary == null ? "" : postData.summary}`}
           />
           <meta
             property="og:image"
@@ -207,34 +199,32 @@ export default function Post({ postData }: any) {
           >
             <PostHeader postData={postData} />
             <PostHeaderMobile postData={postData} />
-            <PostArea postData={postData} />
+            <PostAreaDeskTop postData={postData} />
             <PostAreaMobile postData={postData} />
           </Flex>
         </Flex>
+        {/* <OtherPostsDeskTop /> */}
         <Footer />
       </Box>
     </>
   );
 }
 
-const PostArea = ({ postData }: any): JSX.Element => {
+const PostAreaDeskTop = ({ postData }: any): JSX.Element => {
   return (
     <Container
-      color={"#333333"}
+      display={{ base: "none", md: "flex" }}
       maxW="900px"
       minW="600px"
       minH="100vh"
       p="2rem"
+      mt="2rem"
+      mb="1rem"
+      backgroundColor={"#FFFFFF"}
       lineHeight={1.9}
       fontFamily={FONT_FAMILY}
       fontSize="16px"
-      backgroundColor={"#FFFFFF"}
-      mt={10}
-      mb="20px"
-      ml="0"
       boxShadow="0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%)"
-      mr="0"
-      display={{ base: "none", md: "flex" }}
       boxSizing="border-box"
     >
       <article>
@@ -247,6 +237,7 @@ const PostArea = ({ postData }: any): JSX.Element => {
 const PostAreaMobile = ({ postData }: any): JSX.Element => {
   return (
     <Container
+      display={{ base: "block", md: "none" }}
       color={"#333333"}
       w="100vw"
       maxW="100vw"
@@ -255,7 +246,6 @@ const PostAreaMobile = ({ postData }: any): JSX.Element => {
       fontFamily={FONT_FAMILY}
       fontSize="14px"
       backgroundColor={"#FFFFFF"}
-      display={{ base: "block", md: "none" }}
     >
       <article>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
@@ -267,7 +257,7 @@ const PostAreaMobile = ({ postData }: any): JSX.Element => {
 export async function getStaticPaths() {
   const ids = getAllPostsIds();
   return {
-    paths: changeIdstoParams(ids),
+    paths: convertIdstoParams(ids),
     fallback: false,
   };
 }
