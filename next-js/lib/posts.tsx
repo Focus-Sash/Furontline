@@ -83,7 +83,17 @@ export const getPostMetaDataFromPath = (filePath: string): any => {
 
 export const getPostMetaDataArrayInDirPath = (dirPath: string): any => {
   const postPaths = collectPostPathsInDirPath(dirPath);
-  return postPaths.map((postPath) => getPostMetaDataFromPath(postPath));
+  return postPaths
+    .map((postPath) => getPostMetaDataFromPath(postPath))
+    .sort((a: any, b: any) => {
+      if (a.date < b.date) {
+        return 1;
+      } else if (a.date > b.date) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
 };
 
 export const getPostIdAsParamsFromPostPaths = (postPaths: string[]): any[] => {
@@ -99,7 +109,15 @@ export function getAllPostsMetaData() {
     const dirFullPath = toFullPath(dirPath);
     postMetaData.push(...getPostMetaDataArrayInDirPath(dirFullPath));
   });
-  return postMetaData;
+  return postMetaData.sort((a: any, b: any) => {
+    if (a.date < b.date) {
+      return 1;
+    } else if (a.date > b.date) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
 }
 
 const searchPostInDirPath = (id: string, dirPath: string): boolean => {
